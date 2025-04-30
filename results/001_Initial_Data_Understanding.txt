@@ -1,0 +1,656 @@
+--- Initial Data Understanding ---
+Analysis started: 2025-04-30 10:19:22
+Using input file: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\Surgery_Data.xlsx
+
+=== 1. Loading Raw Data ===
+Loaded df_all_raw: 63,120 rows, 27 columns
+Loaded df_cancel_raw: 44,295 rows, 28 columns
+Converted 'תאריך ביטול ניתוח' and 'תאריך הניתוח המתוכנן בזמן הביטול' in df_cancel_raw to datetime.
+
+=== 2. Basic Structure & Info (Summary) ===
+df_all_raw Shape: (63120, 27)
+df_cancel_raw Shape: (44295, 28)
+
+=== 3. Cancellation Log Analysis (Consistency & Duplicates) ===
+
+--- 3a. Basic Counts ---
+Total rows in df_cancel_raw: 44,295
+Unique 'מספר ניתוח תכנון' in df_cancel_raw: 34,060
+
+--- 3b. Exact Duplicate Row Analysis ---
+Number of rows identified as EXACT duplicates (identical across all columns): 0
+
+--- 3c. Multiple Cancellation Event Analysis (Same Plan ID, Different Row Data) ---
+Number of unique 'מספר ניתוח תכנון' associated with multiple distinct cancellation/change events: 7,236
+Total rows involved in these multiple distinct events: 17,471
+These represent Plan IDs where the cancellation log captured different information (e.g., different cancel date, planned date) over time.
+
+Examples of multiple distinct events for the same Plan ID:
+(Showing details for Plan IDs: ['2018002590', '2018500372', '2018500565'])
+|   ת"ז מותממת |   מספר ניתוח תכנון | מחלקה מנתחת    | קוד ניתוח   | תאריך פתיחת בקשה    | תאריך מקורי של קביעת ניתוח   |   ימים מפתיחת הבקשה ועד תאריך מקורי של קביעת הניתוח | תאריך ביטול ניתוח   | תאריך הניתוח המתוכנן בזמן הביטול   |   ימים מביטול הניתוח ועד התאריך המתוכנן | אתר ניתוח   | סיבת ניתוח                    | הרדמה   |   גיל המטופל בזמן הביטול | מין   | עיר     | גורם משלם   | מצב משפחתי   |   BMI |   תרופות קבועות | אבחנות רקע   |   potassium |   albumin |   HB |   sodium |   PLT |   WBC |   PT-INR |
+|-------------:|-------------------:|:---------------|:------------|:--------------------|:-----------------------------|----------------------------------------------------:|:--------------------|:-----------------------------------|----------------------------------------:|:------------|:------------------------------|:--------|-------------------------:|:------|:--------|:------------|:-------------|------:|----------------:|:-------------|------------:|----------:|-----:|---------:|------:|------:|---------:|
+|       650940 |         2018002590 | כירורגית ילדים | Z5300       | 2018-12-30 00:00:00 | 2019-03-07 00:00:00          |                                                  67 | 2020-01-01 00:00:00 | 2020-01-02 00:00:00                |                                       1 | אתר מרכזי   | הקדמת תור המטופל              | כללית   |                        7 | נקבה  | נתניה   | כללית       | nan          |  16.9 |             nan | nan          |         nan |       nan |  nan |      nan |   nan |   nan |      nan |
+|       650940 |         2018002590 | כירורגית ילדים | Z5300       | 2018-12-30 00:00:00 | 2019-03-07 00:00:00          |                                                  67 | 2020-01-01 00:00:00 | 2020-02-06 00:00:00                |                                      36 | אתר מרכזי   | הקדמת תור המטופל              | כללית   |                        7 | נקבה  | נתניה   | כללית       | nan          |  16.9 |             nan | nan          |         nan |       nan |  nan |      nan |   nan |   nan |      nan |
+|       753176 |         2018500372 | אף אוזן גרון   | Z215        | NaT                 | 2020-01-12 00:00:00          |                                                 nan | 2020-01-08 00:00:00 | 2020-05-24 00:00:00                |                                     137 | אשפוז יום   | ביטול/סגירה בשל טרום ניתוח    | כללית   |                       37 | זכר   | רעננה   | ‎שרון שומרון‎ | nan          | nan   |             nan | nan          |         nan |       nan |  nan |      nan |   nan |   nan |      nan |
+|       753176 |         2018500372 | אף אוזן גרון   | Z215        | NaT                 | 2020-01-12 00:00:00          |                                                 nan | 2020-03-11 00:00:00 | 2020-05-17 00:00:00                |                                      67 | אשפוז יום   | ביטול/סגירה עפ"י דרישת המטופל | כללית   |                       37 | זכר   | רעננה   | ‎שרון שומרון‎ | nan          | nan   |             nan | nan          |         nan |       nan |  nan |      nan |   nan |   nan |      nan |
+|       626333 |         2018500565 | אף אוזן גרון   | Z215        | 2011-12-07 00:00:00 | 2019-08-04 00:00:00          |                                                2797 | 2020-01-14 00:00:00 | 2020-09-06 00:00:00                |                                     236 | אשפוז יום   | ביטול/סגירה בשל טרום ניתוח    | כללית   |                       54 | זכר   | הרצלייה | כללית       | נשוי         |  31.1 |             nan | Unknown      |         nan |       nan |  nan |      nan |   nan |   nan |      nan |
+|       626333 |         2018500565 | אף אוזן גרון   | Z215        | 2011-12-07 00:00:00 | 2019-08-04 00:00:00          |                                                2797 | 2020-07-14 00:00:00 | 2020-07-19 00:00:00                |                                       5 | אשפוז יום   | ביטול/סגירה בשל טרום ניתוח    | כללית   |                       54 | זכר   | הרצלייה | כללית       | נשוי         |  31.1 |             nan | Unknown      |         nan |       nan |  nan |      nan |   nan |   nan |      nan |
+
+--- 3d. Matching with Main Dataset (df_all_raw) ---
+Rows marked as canceled in df_all_raw (based on *any* entry in cancel log): 12,516
+Unique canceled Plan IDs from df_cancel_raw found in df_all_raw: 12,504
+-> 21,556 unique canceled Plan IDs from df_cancel_raw are NOT PRESENT in df_all_raw.
+
+=== 4. Missing Value Analysis (df_all_raw) ===
+                        Missing Count  Missing Percentage (%)
+ALBUMIN                         36457                   57.76
+אבחנות רקע                      31772                   50.34
+PT-INR                          31353                   49.67
+תרופות קבועות                   30810                   48.81
+POTASSIUM                       21989                   34.84
+SODIUM                          21963                   34.80
+BMI                             21876                   34.66
+PLT                             20716                   32.82
+WBC                             20710                   32.81
+HB                              20710                   32.81
+מצב משפחתי                      12926                   20.48
+distance_km                      3512                    5.56
+גורם משלם                         256                    0.41
+קוד ניתוח                          51                    0.08
+עיר                                28                    0.04
+מין                                12                    0.02
+גיל המטופל בזמן הניתוח             11                    0.02
+ת"ז מותממת                          9                    0.01
+
+=== 5. Target Variable Analysis ('was_canceled_accurate') ===
+Overall Accurate Cancellation Rate: 19.83%
+
+Distribution of Target Variable:
+was_canceled_accurate
+False    0.8017
+True     0.1983
+
+Counts:
+was_canceled_accurate
+False    50604
+True     12516
+(Dataset Imbalance Ratio: ~0.25)
+
+=== 6. Numerical Feature Analysis (df_all_raw) ===
+Analyzing numerical columns: ['גיל המטופל בזמן הניתוח', 'BMI', 'ALBUMIN', 'PT-INR', 'POTASSIUM', 'SODIUM', 'HB', 'WBC', 'PLT', 'ימים מתאריך פתיחת בקשה ועד תאריך ביצוע ניתוח', 'distance_km']
+
+Descriptive Statistics (Overall):
+       גיל המטופל בזמן הניתוח           BMI   ALBUMIN    PT-INR  POTASSIUM    SODIUM        HB       WBC       PLT  ימים מתאריך פתיחת בקשה ועד תאריך ביצוע ניתוח  distance_km
+count                63109.00  4.124400e+04  26663.00  31767.00   41131.00  41156.00  42410.00  42410.00  42404.00                                      63120.00     59608.00
+mean                    56.09  4.473920e+03      3.93      1.00       4.40    139.58     13.15      8.04    251.82                                         86.78        19.55
+std                     23.21  7.663632e+05      0.47      0.17       0.42      2.65      1.77      4.19     87.51                                        119.80        32.15
+min                      0.00  0.000000e+00      1.50      0.69       2.60    117.00      5.50      0.33      5.00                                          1.00         0.00
+25%                     40.00  2.340000e+01      3.70      0.94       4.10    138.00     12.00      6.10    195.00                                          9.00         5.08
+50%                     62.00  2.660000e+01      4.00      0.98       4.40    140.00     13.20      7.50    239.00                                         41.00        15.60
+75%                     74.00  3.040000e+01      4.25      1.03       4.60    141.10     14.40      9.25    291.00                                        115.00        19.09
+max                    124.00  1.555700e+08      5.60      5.77       7.70    156.00     23.80    192.50   1612.00                                       3464.00       340.32
+
+Descriptive Statistics (Grouped by 'was_canceled_accurate'):
+                      גיל המטופל בזמן הניתוח                                                  BMI                                                          ALBUMIN                                         PT-INR                                           POTASSIUM                                        SODIUM                                                        HB                                                WBC                                                 PLT                                                   ימים מתאריך פתיחת בקשה ועד תאריך ביצוע ניתוח                                                 distance_km                                              
+                                       count   mean    std  min   25%   50%   75%    max    count     mean        std  min   25%   50%   75%          max    count  mean   std  min  25%  50%   75%  max    count  mean   std   min   25%   50%   75%   max     count  mean   std  min  25%  50%  75%  max    count    mean   std    min    25%    50%    75%    max    count   mean   std  min   25%   50%   75%   max    count  mean   std   min   25%   50%   75%    max    count    mean    std   min    25%    50%    75%     max                                        count    mean     std  min   25%   50%    75%     max       count   mean    std  min   25%   50%    75%     max
+was_canceled_accurate                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+False                                50594.0  56.35  23.00  0.0  40.0  62.0  74.0  123.0  32715.0  5567.48  860453.13  0.0  23.4  26.6  30.4  155570000.0  21113.0  3.93  0.46  1.5  3.7  4.0  4.24  5.4  25037.0  1.00  0.17  0.69  0.94  0.98  1.03  5.65   32877.0  4.39  0.42  2.7  4.1  4.4  4.6  7.6  32897.0  139.56  2.66  117.0  138.0  140.0  141.1  156.0  33852.0  13.12  1.77  5.5  12.0  13.2  14.3  21.4  33852.0  8.06  4.33  0.33  6.10  7.50  9.28  192.5  33847.0  251.48  87.16   5.0  195.0  239.0  291.0  1612.0                                      50604.0   73.99  105.52  1.0   7.0  32.0   98.0  1442.0     47841.0  19.47  32.01  0.0  5.08  15.6  19.09  340.32
+True                                 12515.0  55.04  24.01  0.0  39.0  62.0  74.0  124.0   8529.0   279.33   13548.10  0.0  23.3  26.4  30.2     850000.0   5550.0  3.94  0.47  1.7  3.7  4.0  4.28  5.6   6730.0  1.01  0.16  0.75  0.94  0.99  1.04  5.77    8254.0  4.41  0.43  2.6  4.1  4.4  4.7  7.7   8259.0  139.66  2.60  117.0  138.0  140.0  141.2  149.0   8558.0  13.25  1.77  6.0  12.2  13.3  14.4  23.8   8558.0  7.97  3.58  0.87  6.02  7.49  9.20  116.4   8557.0  253.19  88.84  30.0  196.0  240.0  293.0  1311.0                                      12516.0  138.48  155.01  1.0  33.0  86.0  190.0  3464.0     11767.0  19.89  32.72  0.0  5.08  15.6  19.09  340.32
+
+=== 7. Date Feature Analysis (df_all_raw) ===
+
+Date Range (תאריך פתיחת בקשה): 2011-10-24 00:00:00 to 2024-07-30 00:00:00
+Date Range (תאריך ביצוע ניתוח): 2020-01-01 00:00:00 to 2024-07-31 00:00:00
+Using existing column 'ימים מתאריך פתיחת בקשה ועד תאריך ביצוע ניתוח' for wait time analysis.
+
+Wait Time (Days from Request to Surgery) Statistics:
+count    63120.0
+mean        86.8
+std        119.8
+min          1.0
+25%          9.0
+50%         41.0
+75%        115.0
+max       3464.0
+
+Wait Time Statistics (Grouped by 'was_canceled_accurate'):
+                         count   mean    std  min   25%   50%    75%     max
+was_canceled_accurate                                                       
+False                  50604.0   74.0  105.5  1.0   7.0  32.0   98.0  1442.0
+True                   12516.0  138.5  155.0  1.0  33.0  86.0  190.0  3464.0
+
+Generated basic calendar features: 'surgery_weekday', 'season'
+
+=== 8. Categorical Feature Analysis (df_all_raw) ===
+Analyzing categorical columns: ['מחלקה מנתחת', 'אתר ניתוח', 'הרדמה', 'קוד ניתוח', 'מין', 'עיר', 'גורם משלם', 'מצב משפחתי', 'surgery_weekday', 'season']
+
+--- Analysis for: מחלקה מנתחת ---
+Number of Unique Values: 20
+Value Counts:
+מחלקה מנתחת
+עיניים                                                                                                  12047
+כירורגיה פלסטית                                                                                         11733
+אורתופדיה                                                                                                7608
+נשים                                                                                                     5079
+אף אוזן גרון                                                                                             4147
+אורולוגיה                                                                                                3828
+כירורגית ב                                                                                               3646
+כירורגית א                                                                                               3524
+ריאות                                                                                                    2605
+יולדות                                                                                                   1861
+כירורגית ילדים                                                                                           1772
+ניתוחי עמוד שדרה                                                                                         1252
+כלי דם                                                                                                   1069
+צנתורי לב                                                                                                 911
+כאב -יום                                                                                                  655
+פה ולסת                                                                                                   654
+כיר' חזה ולב                                                                                              452
+מכון אלקטרופיזיולוגיה                                                                                     269
+מכון גסטרו אנטרולוגי                                                                                        7
+צנתורים-אנגיו                                                                                               1
+
+Cancellation Rate by מחלקה מנתחת:
+                                                                                                      Cancel Rate  Total Count
+מחלקה מנתחת                                                                                                                   
+עיניים                                                                                                      0.230        12047
+כירורגיה פלסטית                                                                                             0.113        11733
+אורתופדיה                                                                                                   0.254         7608
+נשים                                                                                                        0.107         5079
+אף אוזן גרון                                                                                                0.254         4147
+אורולוגיה                                                                                                   0.340         3828
+כירורגית ב                                                                                                  0.181         3646
+כירורגית א                                                                                                  0.239         3524
+ריאות                                                                                                       0.188         2605
+יולדות                                                                                                      0.025         1861
+כירורגית ילדים                                                                                              0.272         1772
+ניתוחי עמוד שדרה                                                                                            0.317         1252
+כלי דם                                                                                                      0.270         1069
+צנתורי לב                                                                                                   0.045          911
+כאב -יום                                                                                                    0.256          655
+פה ולסת                                                                                                     0.174          654
+כיר' חזה ולב                                                                                                0.051          452
+מכון אלקטרופיזיולוגיה                                                                                       0.141          269
+מכון גסטרו אנטרולוגי                                                                                        0.143            7
+צנתורים-אנגיו                                                                                               0.000            1
+
+--- Analysis for: אתר ניתוח ---
+Number of Unique Values: 9
+Value Counts:
+אתר ניתוח
+חדר ניתוח מרכזי                                                                                         23652
+חדר ניתוח אשפוז יום                                                                                     23604
+חדר ניתוח עיניים                                                                                         9903
+ברונכוסקופיה                                                                                             2337
+חדר ניתוח סטולברג                                                                                        1892
+צינתורי לב                                                                                                732
+קיסרי דחוף                                                                                                529
+חדר ניתוח קוצבי לב                                                                                        446
+צינתורים ואנגיוגרפיה                                                                                       25
+
+Cancellation Rate by אתר ניתוח:
+                                                                                                      Cancel Rate  Total Count
+אתר ניתוח                                                                                                                     
+חדר ניתוח מרכזי                                                                                             0.241        23652
+חדר ניתוח אשפוז יום                                                                                         0.165        23604
+חדר ניתוח עיניים                                                                                            0.233         9903
+ברונכוסקופיה                                                                                                0.189         2337
+חדר ניתוח סטולברג                                                                                           0.029         1892
+צינתורי לב                                                                                                  0.045          732
+קיסרי דחוף                                                                                                  0.060          529
+חדר ניתוח קוצבי לב                                                                                          0.103          446
+צינתורים ואנגיוגרפיה                                                                                        0.280           25
+
+--- Analysis for: הרדמה ---
+Number of Unique Values: 23
+Value Counts:
+הרדמה
+מקומית                                                                                                  29403
+כללית                                                                                                   29114
+ספינאלית                                                                                                 2176
+סדציה                                                                                                    1582
+אזורית                                                                                                    269
+מקומית+סדציה                                                                                              179
+כללית+אזורית                                                                                              139
+מקומית+מרדים                                                                                              134
+בלוק                                                                                                       22
+ללא הרדמה                                                                                                  14
+כללית+אפידורלית                                                                                            13
+כללית+קאודלית                                                                                              13
+אפידורלית+ספינאלית                                                                                         10
+ספינאלית+סדציה                                                                                             10
+כללית+מקומית                                                                                                9
+אפידורלית                                                                                                   7
+TIVA                                                                                                        4
+הרדמה אחרת                                                                                                  4
+ספינאלית שהפכה לכללית                                                                                       4
+סדציה+אפידורלית                                                                                             4
+חולה מונשם                                                                                                  4
+מקומית שהפכה לכללית                                                                                         3
+סדציה+אזורית                                                                                                3
+
+Cancellation Rate by הרדמה:
+                                                                                                      Cancel Rate  Total Count
+הרדמה                                                                                                                         
+מקומית                                                                                                      0.180        29403
+כללית                                                                                                       0.226        29114
+ספינאלית                                                                                                    0.081         2176
+סדציה                                                                                                       0.188         1582
+אזורית                                                                                                      0.264          269
+מקומית+סדציה                                                                                                0.251          179
+כללית+אזורית                                                                                                0.158          139
+מקומית+מרדים                                                                                                0.164          134
+בלוק                                                                                                        0.364           22
+ללא הרדמה                                                                                                   0.071           14
+כללית+קאודלית                                                                                               0.385           13
+כללית+אפידורלית                                                                                             0.077           13
+אפידורלית+ספינאלית                                                                                          0.400           10
+ספינאלית+סדציה                                                                                              0.300           10
+כללית+מקומית                                                                                                0.111            9
+אפידורלית                                                                                                   0.143            7
+הרדמה אחרת                                                                                                  0.500            4
+סדציה+אפידורלית                                                                                             0.250            4
+ספינאלית שהפכה לכללית                                                                                       0.250            4
+TIVA                                                                                                        0.000            4
+חולה מונשם                                                                                                  0.000            4
+סדציה+אזורית                                                                                                0.667            3
+מקומית שהפכה לכללית                                                                                         0.000            3
+
+--- Analysis for: קוד ניתוח ---
+Number of Unique Values: 1293
+Top 20 Most Frequent Values:
+קוד ניתוח
+Z13410                                                                                                  6517
+Z863                                                                                                    4218
+Z8689                                                                                                   4135
+Z8624                                                                                                   2316
+Z3324                                                                                                   2008
+Z741                                                                                                    1843
+Z68120                                                                                                  1451
+Z1472                                                                                                   1182
+Z5123                                                                                                   1064
+Z8521                                                                                                   1035
+Z22190                                                                                                   866
+Z5749                                                                                                    834
+Z5300                                                                                                    803
+Z8339                                                                                                    715
+Z0443                                                                                                    694
+Z283                                                                                                     513
+Z672                                                                                                     506
+Z560                                                                                                     473
+Z08700                                                                                                   467
+Z215                                                                                                     464
+
+Cancellation Rate by קוד ניתוח:
+                                                                                                      Cancel Rate  Total Count
+קוד ניתוח                                                                                                                     
+Z13410                                                                                                      0.250         6517
+Z863                                                                                                        0.094         4218
+Z8689                                                                                                       0.111         4135
+Z8624                                                                                                       0.108         2316
+Z3324                                                                                                       0.184         2008
+Z741                                                                                                        0.025         1843
+Z68120                                                                                                      0.115         1451
+Z1472                                                                                                       0.171         1182
+Z5123                                                                                                       0.296         1064
+Z8521                                                                                                       0.071         1035
+Z22190                                                                                                      0.209          866
+Z5749                                                                                                       0.402          834
+Z5300                                                                                                       0.296          803
+Z8339                                                                                                       0.227          715
+Z0443                                                                                                       0.256          694
+Z283                                                                                                        0.261          513
+Z672                                                                                                        0.087          506
+Z560                                                                                                        0.378          473
+Z08700                                                                                                      0.368          467
+Z215                                                                                                        0.291          464
+... (showing top 20 by count)
+
+--- Analysis for: מין ---
+Number of Unique Values: 4
+Value Counts:
+מין
+נקבה           31982
+זכר            31096
+לא ידוע           30
+__MISSING__       12
+
+Cancellation Rate by מין:
+         Cancel Rate  Total Count
+מין                              
+נקבה           0.179        31982
+זכר            0.218        31096
+לא ידוע        0.200           30
+NaN            0.083           12
+
+--- Analysis for: עיר ---
+Number of Unique Values: 795
+Top 20 Most Frequent Values:
+עיר
+כפר סבא           9028
+נתניה             7912
+טייבה             4058
+רעננה             3957
+הרצלייה           3709
+הוד השרון         2785
+טירה              2295
+חדרה              2003
+קלנסווה           1913
+כפר יונה          1123
+פתח תקווה         1000
+תל אביב -יפו       827
+באקה אל-גרביה      824
+פרדס חנה-כרכור     797
+קדימה              745
+רמת השרון          719
+אבן יהודה          599
+תל מונד            578
+ראש העין           556
+אום אל-פחם         481
+
+Cancellation Rate by עיר:
+                Cancel Rate  Total Count
+עיר                                     
+כפר סבא               0.195         9028
+נתניה                 0.208         7912
+טייבה                 0.206         4058
+רעננה                 0.188         3957
+הרצלייה               0.204         3709
+הוד השרון             0.182         2785
+טירה                  0.205         2295
+חדרה                  0.208         2003
+קלנסווה               0.197         1913
+כפר יונה              0.206         1123
+פתח תקווה             0.179         1000
+תל אביב -יפו          0.175          827
+באקה אל-גרביה         0.227          824
+פרדס חנה-כרכור        0.164          797
+קדימה                 0.234          745
+רמת השרון             0.175          719
+אבן יהודה             0.214          599
+תל מונד               0.216          578
+ראש העין              0.185          556
+אום אל-פחם            0.212          481
+... (showing top 20 by count)
+
+--- Analysis for: גורם משלם ---
+Number of Unique Values: 27
+Value Counts:
+גורם משלם
+כללית                52416
+מכבי                  5005
+‎ממון עצמי-לא מב‎     2235
+מאוחדת                1611
+לאומית                1070
+‎חיל רפואה‎            451
+__MISSING__            256
+‎שרות בתי הסוהר‎        18
+‎שרון שומרון‎           16
+ר.פלסט-עזה-עם ה         12
+דן , פתח-תקוה            4
+קצ"ת  - צה"ל             3
+‎משרד הבטחון‎            3
+‎תל אביב‎                2
+‎ת"ע ע.שטחים מקח‎        2
+ר.פלסט-יו"ש-עם           2
+‎חיפה‎                   2
+‎צפון‎                   2
+‎קופ"ח מכבי‎             2
+ביקורופא-ע.זרים          1
+קופ"ח לאומית             1
+‎ת"ע ע.זרים‎             1
+‎תייר/תעריף מלא‎         1
+‎ח.ביטוח-קופות א‎        1
+‎מרכז‎                   1
+קופ"ח מאוחדת             1
+ר.פלסט-יו"ש-ללא          1
+
+Cancellation Rate by גורם משלם:
+                   Cancel Rate  Total Count
+גורם משלם                                  
+כללית                    0.199        52416
+מכבי                     0.188         5005
+‎ממון עצמי-לא מב‎        0.195         2235
+מאוחדת                   0.194         1611
+לאומית                   0.212         1070
+‎חיל רפואה‎              0.226          451
+NaN                      0.219          256
+‎שרות בתי הסוהר‎         0.444           18
+‎שרון שומרון‎            0.062           16
+ר.פלסט-עזה-עם ה          0.083           12
+דן , פתח-תקוה            0.000            4
+קצ"ת  - צה"ל             0.333            3
+‎משרד הבטחון‎            0.000            3
+‎ת"ע ע.שטחים מקח‎        0.500            2
+ר.פלסט-יו"ש-עם           0.000            2
+‎חיפה‎                   0.000            2
+‎צפון‎                   0.000            2
+‎קופ"ח מכבי‎             0.000            2
+‎תל אביב‎                0.000            2
+ביקורופא-ע.זרים          1.000            1
+ר.פלסט-יו"ש-ללא          1.000            1
+קופ"ח לאומית             0.000            1
+קופ"ח מאוחדת             0.000            1
+‎ח.ביטוח-קופות א‎        0.000            1
+‎מרכז‎                   0.000            1
+‎ת"ע ע.זרים‎             0.000            1
+‎תייר/תעריף מלא‎         0.000            1
+
+--- Analysis for: מצב משפחתי ---
+Number of Unique Values: 6
+Value Counts:
+מצב משפחתי
+נשוי           32933
+__MISSING__    12926
+רווק            6896
+אלמן            5337
+גרוש            4870
+פרוד             158
+
+Cancellation Rate by מצב משפחתי:
+            Cancel Rate  Total Count
+מצב משפחתי                          
+נשוי              0.201        32933
+NaN               0.177        12926
+רווק              0.216         6896
+אלמן              0.201         5337
+גרוש              0.207         4870
+פרוד              0.291          158
+
+--- Analysis for: surgery_weekday ---
+Number of Unique Values: 6
+Value Counts:
+surgery_weekday
+Thursday     14574
+Monday       12586
+Wednesday    12124
+Tuesday      12082
+Sunday       11732
+Friday          22
+
+Cancellation Rate by surgery_weekday:
+                 Cancel Rate  Total Count
+surgery_weekday                          
+Thursday               0.177        14574
+Monday                 0.201        12586
+Wednesday              0.232        12124
+Tuesday                0.186        12082
+Sunday                 0.199        11732
+Friday                 0.091           22
+
+--- Analysis for: season ---
+Number of Unique Values: 4
+Value Counts:
+season
+Winter    17662
+Summer    16384
+Spring    16263
+Fall      12811
+
+Cancellation Rate by season:
+        Cancel Rate  Total Count
+season                          
+Winter        0.194        17662
+Summer        0.198        16384
+Spring        0.198        16263
+Fall          0.204        12811
+
+=== 9. Text Feature Analysis (Counts) ===
+Analyzing text complexity (counts) for: ['תרופות קבועות', 'אבחנות רקע']
+
+--- Statistics for num_תרופות_קבועות ---
+(Calculated by splitting 'תרופות קבועות' by comma)
+
+Overall Statistics:
+count    63120.0
+mean         4.5
+std          7.8
+min          0.0
+25%          0.0
+50%          1.0
+75%          6.0
+max         78.0
+
+Statistics Grouped by 'was_canceled_accurate':
+                         count  mean  std  min  25%  50%  75%   max
+was_canceled_accurate                                              
+False                  50604.0   4.4  7.8  0.0  0.0  1.0  6.0  78.0
+True                   12516.0   5.0  8.2  0.0  0.0  1.0  7.0  75.0
+
+Example raw text content for 'תרופות קבועות' (first 5 non-empty):
+ AVILAC SOL 670 mg   /1mL , CALCIUM CITRATE + V...
+ AMLODIPINE TEVA TAB 5 mg , ELTROXIN TAB 100 mc...
+ ACETYLSALICYLIC ACID TAB 100 mg , ASPIRIN BAYE...
+ ALLORIL TAB 100 mg , ALPHA D3 CAP 0.25 mcg , A...
+ AUGMENTIN BID TAB 875 mg , RAMIPRIL TAB 5 mg ,...
+
+--- Statistics for num_אבחנות_רקע ---
+(Calculated by splitting 'אבחנות רקע' by comma)
+
+Overall Statistics:
+count    63120.0
+mean         1.6
+std          2.7
+min          0.0
+25%          0.0
+50%          0.0
+75%          2.0
+max         22.0
+
+Statistics Grouped by 'was_canceled_accurate':
+                         count  mean  std  min  25%  50%  75%   max
+was_canceled_accurate                                              
+False                  50604.0   1.6  2.6  0.0  0.0  0.0  2.0  22.0
+True                   12516.0   1.7  2.8  0.0  0.0  0.0  2.0  22.0
+
+Example raw text content for 'אבחנות רקע' (first 5 non-empty):
+                    CALCULUS OF KIDNEY AND URETER 
+                       MALIGNANT NEOPLASM BLADDER 
+ CHRONIC RENAL FAILURE , DIABETES MELLITUS TYPE...
+ AMAUROSIS FUGAX- , CAROTID ENDARTRECTOMY , ESS...
+ [אבחנה ללא קוד] , ANEMIA , AORTIC VALVE DISORD...
+
+=== 10. Analysis of Multiple Cancellation Events ===
+Analyzing the 7,236 unique Plan IDs identified with multiple distinct cancellation events.
+
+--- Statistics on Timing of Multiple Events ---
+Days Since Last Cancellation (for the same Plan ID):
+count    10235.0
+mean        60.2
+std         85.6
+min          0.0
+25%          6.0
+50%         30.0
+75%         79.0
+max        881.0
+
+Days from Cancellation Date to Planned Surgery Date:
+count    17471.0
+mean        19.1
+std         36.8
+min       -313.0
+25%          1.0
+50%          7.0
+75%         22.0
+max        675.0
+
+Number of Cancellation Events per Plan ID (for those with >1 event):
+count    7236.0
+mean        2.4
+std         0.8
+min         2.0
+25%         2.0
+50%         2.0
+75%         3.0
+max        12.0
+
+--- Characteristics of Patients/Surgeries with Multiple Events ---
+Found 3,309 matching entries in df_all_raw for the 7,236 Plan IDs with multiple events.
+
+Comparison of Averages (Multiple Events vs. Overall):
+               Metric  Multiple Events  Overall
+              Avg Age            54.22    56.09
+       Avg BMI (Raw*)           718.42  4473.92
+        Avg Wait Days           175.14    86.78
+Cancellation Rate (%)           100.00    19.83
+(* BMI Averages are indicative only due to data quality issues)
+
+Most Common Departments ('מחלקה מנתחת') for Multiple Events:
+מחלקה מנתחת
+עיניים                                                                                                  787
+אורתופדיה                                                                                               504
+אורולוגיה                                                                                               467
+אף אוזן גרון                                                                                            311
+כירורגיה פלסטית                                                                                         247
+כירורגית א                                                                                              221
+כירורגית ילדים                                                                                          180
+כירורגית ב                                                                                              150
+ניתוחי עמוד שדרה                                                                                        124
+ריאות                                                                                                    98
+
+=== 11. Key Insights and Actionable Points from Raw Data ===
+
+Based on the analysis of the raw data ('Surgery_Data.xlsx'):
+
+**1. Data Scope & Cancellation Consistency:**
+   - Main dataset (df_all_raw): 63,120 records, 32 columns.
+   - Cancellation log (df_cancel_raw): 44,295 records. Contains 34,060 unique Plan IDs.
+   - Exact duplicate rows (identical across all columns) identified: 0. These are likely errors.
+   - Multiple distinct cancellation events (same Plan ID, different row data) identified for 7,236 unique Plan IDs, involving 17,471 rows after removing exact duplicates. These likely represent real rescheduling/cancellation sequences.
+   - Crucially, only ~12,504 unique Plan IDs from the ENTIRE cancellation log are present in the main dataset (df_all_raw).
+   - The derived 'was_canceled_accurate' flag (19.83% True) uses the presence of *any* entry for a Plan ID in the cancel log for matching.
+
+**2. Missing Values - Major Concern:** Remains a key issue. High percentages missing in labs, BMI, diagnoses, medications, etc. Action Point: Imputation/flagging strategy needed in 002.
+
+**3. Target Variable Imbalance:** Remains the same (~1:4 ratio). Action Point: Use appropriate metrics (Precision, Recall, AUC) and consider imbalance techniques.
+
+**4. Numerical Features Insights & Issues:**
+   - Age: Similar average age between groups. Max age (124) needs check.
+   - **BMI:** Still contains highly erroneous values. Critical cleaning needed (Action Point).
+   - Lab tests & Sodium: As before, minor differences, check potential text in Sodium during cleaning (Action Point).
+   - Wait Time: Still shows a significant difference (longer wait for canceled). Ensure inclusion in engineered features (Action Point).
+
+**5. Categorical Features Insights:** Room, Anesthesia, Procedure Code, Site show strongest rate differences. High cardinality needs addressing (Action Point).
+
+**6. Text Features (Counts):** Counts themselves remain weak predictors.
+
+**7. Multiple Cancellation Events (NEW INSIGHTS):**
+   - A significant number of Plan IDs (7,236) have multiple distinct entries in the cancellation log.
+   - Analysis of timing and characteristics of these patients/surgeries may reveal patterns. This data is valuable. Action Point: Consider how to leverage this in feature engineering (e.g., 'num_previous_cancel_events').
+
+**8. Overall Next Steps:**
+   - Proceed to feature engineering (002).
+   - **Critical:** Clean BMI.
+   - **Important:** Include 'wait_days'.
+   - Address Missing Values (Imputation strategy).
+   - Address High Cardinality features.
+   - **Consider:** How to leverage multiple cancellation event info.
+   - Re-run detailed analysis (003) *after* feature engineering.
+
+
+=== 12. End of Initial Data Understanding Report ===
+This report provides a statistical overview of the raw data, including duplicate analysis.
+Review the missing values, distributions, cancellation rates, and multiple event analysis.
+The 'was_canceled_accurate' column used here is derived based on *any* matching plan ID in the cancel log.
+Next logical step is Feature Engineering (like in 002_Feature_Engineering.py).
+
+--- Analysis complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\001_Initial_Data_Understanding.txt ---
