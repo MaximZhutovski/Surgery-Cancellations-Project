@@ -1,0 +1,80 @@
+2025-05-12 17:41:03,042 - INFO - --- Model Training and Evaluation (Script 005 - Post 004_v3) ---
+2025-05-12 17:41:03,042 - INFO - Using processed data from 004_Data_Final_Preprocessing.py (v3 output)
+2025-05-12 17:41:03,043 - INFO - 
+=== 1. Loading Processed Data ===
+2025-05-12 17:41:03,108 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-12 17:41:03,108 - INFO - Loaded y_train: (47340,)
+2025-05-12 17:41:03,108 - INFO - Loaded X_test_processed: (15780, 156)
+2025-05-12 17:41:03,109 - INFO - Loaded y_test: (15780,)
+2025-05-12 17:41:03,109 - INFO - Loaded 156 processed feature names.
+2025-05-12 17:41:03,109 - INFO - 
+=== 2. Model Training (XGBoost Classifier - Untuned on New Features) ===
+2025-05-12 17:41:03,110 - INFO - Calculated scale_pos_weight for XGBoost: 4.04
+2025-05-12 17:41:03,110 - INFO - Training XGBoost model...
+2025-05-12 17:41:04,993 - INFO - XGBoost model training complete.
+2025-05-12 17:41:04,994 - INFO - 
+=== 3. Model Prediction and Evaluation ===
+2025-05-12 17:41:04,994 - INFO - Making predictions on the test set...
+2025-05-12 17:41:05,023 - INFO - 
+--- Evaluation Metrics (XGBoost Untuned - New Features) ---
+2025-05-12 17:41:05,044 - INFO - Accuracy:  0.6906
+2025-05-12 17:41:05,044 - INFO - Precision: 0.3582
+2025-05-12 17:41:05,044 - INFO - Recall:    0.7079
+2025-05-12 17:41:05,044 - INFO - F1-score:  0.4757
+2025-05-12 17:41:05,046 - INFO - ROC AUC:   0.7693
+2025-05-12 17:41:05,046 - INFO - PR AUC:    0.4599
+2025-05-12 17:41:05,046 - INFO - 
+Classification Report:
+2025-05-12 17:41:05,057 - INFO - 
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.69      0.78     12651
+    Canceled (1)       0.36      0.71      0.48      3129
+
+        accuracy                           0.69     15780
+       macro avg       0.63      0.70      0.63     15780
+    weighted avg       0.80      0.69      0.72     15780
+
+2025-05-12 17:41:05,060 - INFO - Confusion Matrix:
+[[8682 3969]
+ [ 914 2215]]
+2025-05-12 17:41:05,274 - INFO - Confusion matrix plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_confusion_matrix_xgb_newfeats.png
+2025-05-12 17:41:05,379 - INFO - ROC curve plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_roc_curve_xgb_newfeats.png
+2025-05-12 17:41:05,493 - INFO - PR curve plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_pr_curve_xgb_newfeats.png
+2025-05-12 17:41:05,495 - INFO - 
+=== 4. Feature Importance (XGBoost - Untuned, New Features) ===
+2025-05-12 17:41:05,498 - INFO - 
+Top 20 Features by Importance:
+2025-05-12 17:41:05,501 - INFO -                                                                                                           feature  importance
+                                                                                      wait_days_category_0-7 days    0.132249
+surgery_site_חדר ניתוח מרכזי                                                                                         0.047946
+                                                                              procedure_code_cancel_rate_smoothed    0.029269
+  department_כירורגיה פלסטית                                                                                         0.025729
+                                                                                                        wait_days    0.025562
+                                                                                     wait_days_category_8-30 days    0.023388
+surgery_site_ברונכוסקופיה                                                                                            0.018787
+  department_אורתופדיה                                                                                               0.014868
+surgery_site_חדר ניתוח עיניים                                                                                        0.014705
+  department_כלי דם                                                                                                  0.014611
+  department_נשים                                                                                                    0.014169
+                                                                                       site_room_ברונכוסקופיה __1    0.013704
+  department_ריאות                                                                                                   0.012942
+                                                                                site_room_חדר ניתוח אשפוז יום __5    0.011950
+                                                                                   wait_days_category_91-365 days    0.010279
+                                                                                                   age_decade_0.0    0.010079
+  department_כירורגית ילדים                                                                                          0.009870
+                                                                                    wait_days_category_31-90 days    0.009725
+  department_עיניים                                                                                                  0.009060
+                                                                                     wait_days_category_365+ days    0.008929
+2025-05-12 17:41:05,852 - INFO - Feature importance plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_feature_importance_xgb_newfeats.png
+2025-05-12 17:41:05,853 - INFO - 
+=== 5. Saving Trained Model and Metrics ===
+2025-05-12 17:41:05,859 - INFO - Trained XGBoost model (untuned, new features) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\xgboost_model.joblib
+2025-05-12 17:41:05,860 - INFO - Evaluation metrics saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\005_evaluation_metrics_xgb_newfeats.txt
+2025-05-12 17:41:05,860 - INFO - 
+=== 6. Summary and Next Steps ===
+2025-05-12 17:41:05,861 - INFO - XGBoost model (untuned, with new features from 002_v3 and 004_v3) training and evaluation complete.
+2025-05-12 17:41:05,861 - INFO - Key metrics: Recall: 0.7079, Precision: 0.3582, F1-score: 0.4757, PR AUC: 0.4599
+2025-05-12 17:41:05,861 - INFO - Next step is likely 006_Hyperparameter_Tuning_XGB.py on this new feature set.
+2025-05-12 17:41:05,862 - INFO - 
+--- Model Training and Evaluation complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\005_Model_Training_and_Evaluation.txt ---

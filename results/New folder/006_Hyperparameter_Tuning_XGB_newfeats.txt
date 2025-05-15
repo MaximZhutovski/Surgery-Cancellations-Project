@@ -1,0 +1,86 @@
+2025-05-12 17:45:47,859 - INFO - --- Hyperparameter Tuning for XGBoost (Script 006 - New Features from 004_v3) ---
+2025-05-12 17:45:47,859 - INFO - === 1. Loading Processed Data (from 004_v3) ===
+2025-05-12 17:45:47,879 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-12 17:45:47,879 - INFO - Loaded 156 processed feature names.
+2025-05-12 17:45:47,880 - INFO - === 2. Hyperparameter Tuning with RandomizedSearchCV (New Features) ===
+2025-05-12 17:45:47,881 - INFO - Using scale_pos_weight: 4.04
+2025-05-12 17:45:47,881 - INFO - Starting RandomizedSearchCV (n_iter=60, cv_splits=3)...
+2025-05-12 17:47:40,885 - INFO - RandomizedSearchCV completed in 1.88 minutes.
+2025-05-12 17:47:40,886 - INFO - Best Score (average_precision) from RandomizedSearchCV: 0.4514
+2025-05-12 17:47:40,886 - INFO - Best Hyperparameters found:
+2025-05-12 17:47:40,886 - INFO -   subsample: 1.0
+2025-05-12 17:47:40,886 - INFO -   reg_lambda: 1
+2025-05-12 17:47:40,886 - INFO -   reg_alpha: 0.005
+2025-05-12 17:47:40,887 - INFO -   n_estimators: 400
+2025-05-12 17:47:40,887 - INFO -   min_child_weight: 7
+2025-05-12 17:47:40,887 - INFO -   max_depth: 9
+2025-05-12 17:47:40,887 - INFO -   learning_rate: 0.02
+2025-05-12 17:47:40,887 - INFO -   gamma: 0.1
+2025-05-12 17:47:40,887 - INFO -   colsample_bytree: 0.7
+2025-05-12 17:47:40,888 - INFO - === 3. Training Final Model with Best Parameters (New Features) ===
+2025-05-12 17:47:40,888 - INFO - Training final XGBoost model with best parameters...
+2025-05-12 17:47:42,632 - INFO - Final XGBoost model training complete.
+2025-05-12 17:47:42,632 - INFO - === 4. Evaluating Tuned Model (New Features) ===
+2025-05-12 17:47:42,633 - INFO - Making predictions on the test set with the tuned model...
+2025-05-12 17:47:42,771 - INFO - 
+--- Tuned Model (New Features) Evaluation Metrics ---
+2025-05-12 17:47:42,791 - INFO - Accuracy:  0.7043
+2025-05-12 17:47:42,791 - INFO - Precision: 0.3680
+2025-05-12 17:47:42,792 - INFO - Recall:    0.6849
+2025-05-12 17:47:42,792 - INFO - F1-score:  0.4788
+2025-05-12 17:47:42,792 - INFO - ROC AUC:   0.7720
+2025-05-12 17:47:42,792 - INFO - PR AUC:    0.4702
+2025-05-12 17:47:42,804 - INFO - 
+Tuned Model (New Features) Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.71      0.79     12651
+    Canceled (1)       0.37      0.68      0.48      3129
+
+        accuracy                           0.70     15780
+       macro avg       0.63      0.70      0.64     15780
+    weighted avg       0.80      0.70      0.73     15780
+
+2025-05-12 17:47:42,806 - INFO - Tuned Model (New Features) Confusion Matrix:
+[[8971 3680]
+ [ 986 2143]]
+2025-05-12 17:47:42,958 - INFO - CM plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\006_confusion_matrix_xgb_tuned_newfeats.png
+2025-05-12 17:47:42,959 - INFO - 
+=== 4b. Tuned Model (New Features) Feature Importance ===
+2025-05-12 17:47:42,964 - INFO - 
+Top 20 Features by Importance (Tuned Model, New Features):
+2025-05-12 17:47:42,967 - INFO -                                                                                                           feature  importance
+                                                                                      wait_days_category_0-7 days    0.123804
+  department_יולדות                                                                                                  0.050575
+surgery_site_חדר ניתוח סטולברג                                                                                       0.047456
+                                                                                     wait_days_category_8-30 days    0.026405
+  department_כירורגיה פלסטית                                                                                         0.024986
+                                                                                     wait_days_category_365+ days    0.022420
+                                                                                         site_room_צינתורי לב __1    0.020538
+                                                                                                        wait_days    0.018745
+  department_צנתורי לב                                                                                               0.018310
+                                                                              procedure_code_cancel_rate_smoothed    0.017896
+surgery_site_חדר ניתוח עיניים                                                                                        0.015829
+  department_נשים                                                                                                    0.014638
+                                                                                   wait_days_category_91-365 days    0.013709
+                                                                                       site_room_ברונכוסקופיה __1    0.013209
+surgery_site_חדר ניתוח מרכזי                                                                                         0.013041
+  department_אורתופדיה                                                                                               0.012432
+surgery_site_ברונכוסקופיה                                                                                            0.011997
+  department_כלי דם                                                                                                  0.011637
+  department_ריאות                                                                                                   0.011232
+                                                                                    wait_days_category_31-90 days    0.009225
+2025-05-12 17:47:43,317 - INFO - FI plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\006_feature_importance_xgb_tuned_newfeats.png
+2025-05-12 17:47:43,318 - INFO - === 5. Saving Tuned Model and Results (New Features) ===
+2025-05-12 17:47:43,340 - INFO - Tuned XGBoost model (new features) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\xgboost_model_tuned_newfeats.joblib
+2025-05-12 17:47:43,341 - INFO - Best hyperparameters (new features) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\006_best_xgb_params_tuned_newfeats.joblib
+2025-05-12 17:47:43,343 - INFO - Tuned evaluation metrics (new features) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\006_evaluation_metrics_xgb_tuned_newfeats.txt
+2025-05-12 17:47:43,343 - INFO - 
+=== 6. Comparison with Previous Models ===
+2025-05-12 17:47:43,343 - INFO - Results for Tuned XGBoost with *New Features* (from this script - 006_newfeats):
+2025-05-12 17:47:43,343 - INFO -   Precision: 0.3680, Recall: 0.6849, F1-score: 0.4788, PR AUC: 0.4702
+2025-05-12 17:47:43,344 - INFO - Compare with:
+2025-05-12 17:47:43,344 - INFO -   1. Untuned XGBoost with *New Features* (from 005_newfeats output).
+2025-05-12 17:47:43,344 - INFO -   2. Tuned XGBoost with *Old Features* (from original 006 output).
+2025-05-12 17:47:43,345 - INFO - 
+--- Hyperparameter Tuning for XGBoost (New Features) complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\006_Hyperparameter_Tuning_XGB_newfeats.txt ---

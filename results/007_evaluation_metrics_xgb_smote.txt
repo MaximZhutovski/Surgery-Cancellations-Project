@@ -1,0 +1,39 @@
+--- SMOTE-XGBoost Model Evaluation Metrics ---
+Used Best Hyperparameters from 006 (scale_pos_weight omitted for SMOTE):
+  objective: binary:logistic
+  colsample_bytree: 0.6
+  eval_metric: logloss
+  gamma: 0.4
+  learning_rate: 0.02
+  max_depth: 10
+  min_child_weight: 7
+  n_estimators: 300
+  n_jobs: -1
+  random_state: 42
+  reg_alpha: 0.001
+  reg_lambda: 0.5
+  subsample: 0.9
+  use_label_encoder: False
+
+--- Evaluation on Test Set ---
+Accuracy:  0.8126
+Precision: 0.6911
+Recall:    0.0994
+F1-score:  0.1738
+ROC AUC:   0.7643
+PR AUC:    0.4545
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.82      0.99      0.89     12651
+    Canceled (1)       0.69      0.10      0.17      3129
+
+        accuracy                           0.81     15780
+       macro avg       0.75      0.54      0.53     15780
+    weighted avg       0.79      0.81      0.75     15780
+
+
+Confusion Matrix:
+[[12512,   139],
+ [ 2818,   311]]

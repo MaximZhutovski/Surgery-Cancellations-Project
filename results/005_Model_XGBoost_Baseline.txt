@@ -1,0 +1,79 @@
+2025-05-15 14:03:09,808 - INFO - --- XGBoost Baseline Model Training (Script 005_Model_XGBoost_Baseline) ---
+2025-05-15 14:03:09,809 - INFO - Using processed data from outputs of script 004 (e.g., C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_train_processed.joblib).
+2025-05-15 14:03:09,809 - INFO - 
+=== 1. Loading Processed Data ===
+2025-05-15 14:03:09,861 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-15 14:03:09,861 - INFO - Loaded y_train: (47340,)
+2025-05-15 14:03:09,861 - INFO - Loaded X_test_processed: (15780, 156)
+2025-05-15 14:03:09,862 - INFO - Loaded y_test: (15780,)
+2025-05-15 14:03:09,862 - INFO - Loaded 156 processed feature names.
+2025-05-15 14:03:09,863 - INFO - 
+=== 2. Model Training (XGBoost Classifier - Untuned Baseline) ===
+2025-05-15 14:03:09,863 - INFO - Calculated scale_pos_weight for XGBoost: 4.04
+2025-05-15 14:03:09,864 - INFO - Training XGBoost baseline model...
+2025-05-15 14:03:11,634 - INFO - XGBoost baseline model training complete.
+2025-05-15 14:03:11,634 - INFO - 
+=== 3. Model Prediction and Evaluation ===
+2025-05-15 14:03:11,634 - INFO - Making predictions on the test set...
+2025-05-15 14:03:11,657 - INFO - 
+--- Evaluation Metrics (XGBoost Baseline) ---
+2025-05-15 14:03:11,677 - INFO - Accuracy:  0.6906
+Precision: 0.3582
+Recall:    0.7079
+F1-score:  0.4757
+ROC AUC:   0.7693
+PR AUC:    0.4599
+2025-05-15 14:03:11,688 - INFO - 
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.69      0.78     12651
+    Canceled (1)       0.36      0.71      0.48      3129
+
+        accuracy                           0.69     15780
+       macro avg       0.63      0.70      0.63     15780
+    weighted avg       0.80      0.69      0.72     15780
+
+2025-05-15 14:03:11,690 - INFO - Confusion Matrix:
+[[8682 3969]
+ [ 914 2215]]
+2025-05-15 14:03:11,834 - INFO - CM plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_Model_XGBoost_Baseline_CM.png
+2025-05-15 14:03:11,932 - INFO - ROC plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_Model_XGBoost_Baseline_ROC.png
+2025-05-15 14:03:12,044 - INFO - PR curve plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_Model_XGBoost_Baseline_PRC.png
+2025-05-15 14:03:12,045 - INFO - 
+=== 4. Feature Importance (XGBoost Baseline) ===
+2025-05-15 14:03:12,047 - INFO - 
+Top 20 Features by Importance:
+2025-05-15 14:03:12,051 - INFO -                                                                                                           feature  importance
+                                                                                      wait_days_category_0-7 days    0.132249
+surgery_site_חדר ניתוח מרכזי                                                                                         0.047946
+                                                                              procedure_code_cancel_rate_smoothed    0.029269
+  department_כירורגיה פלסטית                                                                                         0.025729
+                                                                                                        wait_days    0.025562
+                                                                                     wait_days_category_8-30 days    0.023388
+surgery_site_ברונכוסקופיה                                                                                            0.018787
+  department_אורתופדיה                                                                                               0.014868
+surgery_site_חדר ניתוח עיניים                                                                                        0.014705
+  department_כלי דם                                                                                                  0.014611
+  department_נשים                                                                                                    0.014169
+                                                                                       site_room_ברונכוסקופיה __1    0.013704
+  department_ריאות                                                                                                   0.012942
+                                                                                site_room_חדר ניתוח אשפוז יום __5    0.011950
+                                                                                   wait_days_category_91-365 days    0.010279
+                                                                                                   age_decade_0.0    0.010079
+  department_כירורגית ילדים                                                                                          0.009870
+                                                                                    wait_days_category_31-90 days    0.009725
+  department_עיניים                                                                                                  0.009060
+                                                                                     wait_days_category_365+ days    0.008929
+2025-05-15 14:03:12,391 - INFO - FI plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\005_Model_XGBoost_Baseline_FI.png
+2025-05-15 14:03:12,391 - INFO - 
+=== 5. Saving Trained Model and Metrics ===
+2025-05-15 14:03:12,399 - INFO - Trained XGBoost baseline model saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\005_xgb_baseline_model.joblib
+2025-05-15 14:03:12,400 - INFO - Evaluation metrics saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\005_Model_XGBoost_Baseline_evaluation_metrics.txt
+2025-05-15 14:03:12,401 - INFO - 
+=== 6. Summary and Next Steps ===
+2025-05-15 14:03:12,401 - INFO - XGBoost baseline model (005_Model_XGBoost_Baseline) training and evaluation complete.
+2025-05-15 14:03:12,401 - INFO - Key metrics: Recall: 0.7079, Precision: 0.3582, F1-score: 0.4757, PR AUC: 0.4599
+2025-05-15 14:03:12,402 - INFO - Next step is 006_Model_XGBoost_Tuning.py to tune hyperparameters for this feature set.
+2025-05-15 14:03:12,403 - INFO - 
+--- 005_Model_XGBoost_Baseline complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\005_Model_XGBoost_Baseline.txt ---

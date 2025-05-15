@@ -1,0 +1,75 @@
+2025-05-15 12:34:52,202 - INFO - --- XGBoost with RandomOverSampler (Script 010) ---
+2025-05-15 12:34:52,202 - INFO - === 1. Loading Processed Data (from 004_v3) and Best Hyperparameters (from 006_newfeats) ===
+2025-05-15 12:34:52,301 - INFO - Loaded best XGBoost hyperparameters from 006_newfeats.
+2025-05-15 12:34:52,301 - INFO - Best Hyperparameters: {'subsample': 1.0, 'reg_lambda': 1, 'reg_alpha': 0.005, 'n_estimators': 400, 'min_child_weight': 7, 'max_depth': 9, 'learning_rate': 0.02, 'gamma': 0.1, 'colsample_bytree': 0.7}
+2025-05-15 12:34:52,302 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-15 12:34:52,302 - INFO - Loaded y_train. Positive class proportion: 0.20
+2025-05-15 12:34:52,303 - INFO - === 2. Defining RandomOverSampler-XGBoost Pipeline ===
+2025-05-15 12:34:52,303 - INFO - XGBoost model configured with best parameters and scale_pos_weight=1 for RandomOverSampler.
+2025-05-15 12:34:52,303 - INFO - RandomOverSampler-XGBoost pipeline defined.
+2025-05-15 12:34:52,303 - INFO - === 3. Training the RandomOverSampler-XGBoost Pipeline ===
+2025-05-15 12:34:55,877 - INFO - Pipeline training completed in 0.06 minutes.
+2025-05-15 12:34:55,879 - INFO - === 4. Evaluating the RandomOverSampler-XGBoost Model ===
+2025-05-15 12:34:55,879 - INFO - Making predictions on the test set...
+2025-05-15 12:34:56,019 - INFO - 
+--- RandomOverSampler-XGBoost Model Evaluation Metrics ---
+2025-05-15 12:34:56,041 - INFO - Accuracy:  0.7083
+2025-05-15 12:34:56,041 - INFO - Precision: 0.3706
+2025-05-15 12:34:56,041 - INFO - Recall:    0.6743
+2025-05-15 12:34:56,041 - INFO - F1-score:  0.4783
+2025-05-15 12:34:56,043 - INFO - ROC AUC:   0.7713
+2025-05-15 12:34:56,043 - INFO - PR AUC:    0.4708
+2025-05-15 12:34:56,055 - INFO - 
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.72      0.80     12651
+    Canceled (1)       0.37      0.67      0.48      3129
+
+        accuracy                           0.71     15780
+       macro avg       0.63      0.70      0.64     15780
+    weighted avg       0.79      0.71      0.73     15780
+
+2025-05-15 12:34:56,057 - INFO - Confusion Matrix:
+[[9067 3584]
+ [1019 2110]]
+2025-05-15 12:34:56,260 - INFO - CM plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\010_confusion_matrix_xgb_ros.png
+2025-05-15 12:34:56,261 - INFO - 
+=== 4b. RandomOverSampler-XGBoost Model Feature Importance ===
+2025-05-15 12:34:56,266 - INFO - 
+Top 20 Features by Importance (ROS-XGBoost Model):
+2025-05-15 12:34:56,278 - INFO -                                                                                                           feature  importance
+                                                                                      wait_days_category_0-7 days    0.111825
+surgery_site_חדר ניתוח סטולברג                                                                                       0.036815
+  department_יולדות                                                                                                  0.028938
+  department_כירורגיה פלסטית                                                                                         0.027420
+                                                                                     wait_days_category_8-30 days    0.023692
+                                                                                     wait_days_category_365+ days    0.022051
+  department_צנתורי לב                                                                                               0.021853
+                                                                                                        wait_days    0.019900
+                                                                              procedure_code_cancel_rate_smoothed    0.017979
+  department_נשים                                                                                                    0.015316
+                                                                                   wait_days_category_91-365 days    0.015225
+                                                                                       site_room_ברונכוסקופיה __1    0.014823
+surgery_site_חדר ניתוח מרכזי                                                                                         0.014428
+  department_כלי דם                                                                                                  0.014294
+                                                                                site_room_חדר ניתוח אשפוז יום __5    0.013628
+  department_ריאות                                                                                                   0.013043
+surgery_site_חדר ניתוח עיניים                                                                                        0.012950
+                                                                                         site_room_צינתורי לב __1    0.012892
+  department_אורתופדיה                                                                                               0.011492
+surgery_site_ברונכוסקופיה                                                                                            0.011247
+2025-05-15 12:34:56,663 - INFO - FI plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\010_feature_importance_xgb_ros.png
+2025-05-15 12:34:56,663 - INFO - === 5. Saving RandomOverSampler-XGBoost Model and Results ===
+2025-05-15 12:34:56,689 - INFO - ROS-XGBoost pipeline model saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\xgboost_model_randomoversampling.joblib
+2025-05-15 12:34:56,691 - INFO - ROS-XGBoost evaluation metrics saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\010_evaluation_metrics_xgb_ros.txt
+2025-05-15 12:34:56,691 - INFO - 
+=== 6. Comparison with Previous Models ===
+2025-05-15 12:34:56,691 - INFO - Metrics for RandomOverSampler-XGBoost Model:
+2025-05-15 12:34:56,691 - INFO -   Precision: 0.3706, Recall: 0.6743, F1-score: 0.4783, PR AUC: 0.4708
+2025-05-15 12:34:56,691 - INFO - Compare with:
+2025-05-15 12:34:56,691 - INFO -   1. Tuned XGBoost (006_newfeats) - P:0.3680, R:0.6849, F1:0.4788, PR_AUC:0.4702
+2025-05-15 12:34:56,691 - INFO -   2. Tuned XGBoost with Optimal Threshold (009_newfeats) - P:0.3632, R:0.7117, F1:0.4810
+2025-05-15 12:34:56,691 - INFO -   3. SMOTE-XGBoost (007) - P:0.4606, R:0.3049, F1:0.3669, PR_AUC:0.4196
+2025-05-15 12:34:56,693 - INFO - 
+--- XGBoost with RandomOverSampler training and evaluation complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\010_Model_XGB_With_RandomOverSampling.txt ---

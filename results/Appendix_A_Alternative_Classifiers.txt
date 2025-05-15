@@ -1,0 +1,124 @@
+2025-05-15 14:26:25,242 - INFO - --- Alternative Models: Random Forest & Logistic Regression (Script 008) ---
+2025-05-15 14:26:25,242 - INFO - === 1. Loading Processed Data ===
+2025-05-15 14:26:25,258 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-15 14:26:25,260 - INFO - Loaded y_train: (47340,)
+2025-05-15 14:26:25,260 - INFO - 
+=== 2. Training and Evaluating Random Forest ===
+2025-05-15 14:26:25,260 - INFO - Training Random Forest model...
+2025-05-15 14:26:29,028 - INFO - Random Forest training completed in 3.77 seconds.
+2025-05-15 14:26:29,028 - INFO - 
+--- Evaluating: RandomForest ---
+2025-05-15 14:26:29,226 - INFO - Prediction time: 0.20 seconds
+2025-05-15 14:26:29,242 - INFO - Accuracy:  0.6579
+2025-05-15 14:26:29,242 - INFO - Precision: 0.3379
+2025-05-15 14:26:29,244 - INFO - Recall:    0.7565
+2025-05-15 14:26:29,244 - INFO - F1-score:  0.4672
+2025-05-15 14:26:29,244 - INFO - ROC AUC:   0.7590
+2025-05-15 14:26:29,244 - INFO - PR AUC:    0.4281
+2025-05-15 14:26:29,253 - INFO - 
+Classification Report for RandomForest:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.63      0.75     12651
+    Canceled (1)       0.34      0.76      0.47      3129
+
+        accuracy                           0.66     15780
+       macro avg       0.63      0.69      0.61     15780
+    weighted avg       0.80      0.66      0.69     15780
+
+2025-05-15 14:26:29,255 - INFO - Confusion Matrix for RandomForest:
+[[8014 4637]
+ [ 762 2367]]
+2025-05-15 14:26:30,087 - INFO - Confusion matrix plot for RandomForest saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\008_confusion_matrix_randomforest.png
+2025-05-15 14:26:52,457 - INFO - 
+Top 20 Feature Importances for RandomForest:
+2025-05-15 14:26:52,457 - INFO -                                                                                                           feature  importance
+                                                                                                        wait_days    0.204903
+                                                                              procedure_code_cancel_rate_smoothed    0.137020
+                                                                                      wait_days_category_0-7 days    0.098297
+                                                                                   site_room_cancel_rate_smoothed    0.047179
+                                                                                   wait_days_category_91-365 days    0.038612
+  department_כירורגיה פלסטית                                                                                         0.029203
+                                                                                     wait_days_category_365+ days    0.024862
+                                                                                     wait_days_category_8-30 days    0.023651
+                                                                                                              age    0.015652
+                                                                                           days_from_prev_holiday    0.014741
+                                                                                             days_to_next_holiday    0.012974
+  department_נשים                                                                                                    0.012345
+                                                                                                              wbc    0.011696
+                                                                                                              plt    0.011343
+surgery_site_חדר ניתוח מרכזי                                                                                         0.011032
+                                                                                                              bmi    0.010969
+                                                                                                               hb    0.010063
+  department_יולדות                                                                                                  0.009888
+surgery_site_חדר ניתוח סטולברג                                                                                       0.009303
+                                                                                                      distance_km    0.009166
+2025-05-15 14:26:52,777 - INFO - Feature importance plot for RandomForest saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\008_feature_importance_randomforest.png
+2025-05-15 14:26:52,798 - INFO - Evaluation metrics for RandomForest saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\008_evaluation_metrics_randomforest.txt
+2025-05-15 14:26:52,869 - INFO - Trained Random Forest model saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\random_forest_model.joblib
+2025-05-15 14:26:52,869 - INFO - 
+=== 3. Training and Evaluating Logistic Regression ===
+2025-05-15 14:26:52,869 - INFO - Training Logistic Regression model...
+2025-05-15 14:26:54,069 - INFO - Logistic Regression training completed in 1.20 seconds.
+2025-05-15 14:26:54,069 - INFO - 
+--- Evaluating: LogisticRegression ---
+2025-05-15 14:26:54,069 - INFO - Prediction time: 0.00 seconds
+2025-05-15 14:26:54,087 - INFO - Accuracy:  0.6603
+2025-05-15 14:26:54,087 - INFO - Precision: 0.3368
+2025-05-15 14:26:54,087 - INFO - Recall:    0.7363
+2025-05-15 14:26:54,087 - INFO - F1-score:  0.4622
+2025-05-15 14:26:54,087 - INFO - ROC AUC:   0.7492
+2025-05-15 14:26:54,087 - INFO - PR AUC:    0.4260
+2025-05-15 14:26:54,103 - INFO - 
+Classification Report for LogisticRegression:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.64      0.75     12651
+    Canceled (1)       0.34      0.74      0.46      3129
+
+        accuracy                           0.66     15780
+       macro avg       0.62      0.69      0.61     15780
+    weighted avg       0.79      0.66      0.69     15780
+
+2025-05-15 14:26:54,105 - INFO - Confusion Matrix for LogisticRegression:
+[[8115 4536]
+ [ 825 2304]]
+2025-05-15 14:26:54,251 - INFO - Confusion matrix plot for LogisticRegression saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\008_confusion_matrix_logisticregression.png
+2025-05-15 14:26:54,251 - INFO - 
+Top 20 Features by Absolute Coefficient for LogisticRegression:
+2025-05-15 14:26:54,269 - INFO -                                                                                                           feature  coefficient
+                                                                                      wait_days_category_0-7 days    -1.459801
+  department_ניתוחי עמוד שדרה                                                                                         0.843132
+                                                                              procedure_code_cancel_rate_smoothed     0.510630
+surgery_site_חדר ניתוח עיניים                                                                                        -0.493379
+surgery_site_ברונכוסקופיה                                                                                             0.467304
+                                                                                    site_room_חדר ניתוח מרכזי __1     0.361323
+                                                                                     wait_days_category_8-30 days    -0.358274
+                                                                                                        wait_days     0.315043
+  department_כלי דם                                                                                                   0.272606
+  department_ריאות                                                                                                    0.261627
+  department_אף אוזן גרון                                                                                            -0.246340
+  department_כירורגית ילדים                                                                                           0.241764
+                                                                                   wait_days_category_91-365 days     0.235460
+surgery_site_קיסרי דחוף                                                                                               0.215338
+                                                                                    site_room_חדר ניתוח מרכזי __9    -0.211110
+                                                                                           surgery_weekday_Sunday     0.202220
+  department_כירורגיה פלסטית                                                                                         -0.179763
+  department_מכון אלקטרופיזיולוגיה                                                                                    0.175014
+                                                                                       distance_bucket_100-200 km    -0.162368
+                                                                                                      payer_כללית    -0.158349
+2025-05-15 14:26:54,610 - INFO - Coefficient plot for LogisticRegression saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\008_coefficients_logisticregression.png
+2025-05-15 14:26:54,626 - INFO - Evaluation metrics for LogisticRegression saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\008_evaluation_metrics_logisticregression.txt
+2025-05-15 14:26:54,632 - INFO - Trained Logistic Regression model saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\logistic_regression_model.joblib
+2025-05-15 14:26:54,632 - INFO - 
+=== 4. Summary and Next Steps ===
+2025-05-15 14:26:54,632 - INFO - Random Forest and Logistic Regression models have been trained and evaluated.
+2025-05-15 14:26:54,633 - INFO - Compare their performance (Precision, Recall, F1, PR AUC for 'Canceled' class) with the tuned XGBoost model from script 006.
+2025-05-15 14:26:54,633 - INFO - Considerations for choosing a model:
+2025-05-15 14:26:54,633 - INFO -   - Performance on key metrics (PR AUC, F1-score for the minority class).
+2025-05-15 14:26:54,634 - INFO -   - Training and prediction time.
+2025-05-15 14:26:54,634 - INFO -   - Interpretability (Logistic Regression coefficients are more directly interpretable).
+2025-05-15 14:26:54,634 - INFO -   - Complexity of tuning and maintenance.
+2025-05-15 14:26:54,634 - INFO - Next steps could involve further tuning of these models or exploring more advanced techniques.
+2025-05-15 14:26:54,635 - INFO - 
+--- Alternative Models training and evaluation complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\Appendix_A_Alternative_Classifiers.txt ---

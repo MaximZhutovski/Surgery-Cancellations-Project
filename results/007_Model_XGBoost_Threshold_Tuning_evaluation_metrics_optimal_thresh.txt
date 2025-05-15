@@ -1,0 +1,20 @@
+--- Tuned XGBoost with Optimal Threshold (0.4845) ---
+Precision: 0.3681
+Recall:    0.7069
+F1-score:  0.4841
+
+Underlying PR AUC of the model: 0.4750
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.70      0.79     12651
+    Canceled (1)       0.37      0.71      0.48      3129
+
+        accuracy                           0.70     15780
+       macro avg       0.64      0.70      0.64     15780
+    weighted avg       0.80      0.70      0.73     15780
+
+
+CM:
+[[8853, 3798],
+ [ 917, 2212]]

@@ -1,0 +1,59 @@
+2025-05-15 13:58:18,430 - INFO - --- Data Final Preprocessing (Script 004_Data_Final_Preprocessing - Post 002_v3) ---
+2025-05-15 13:58:18,430 - INFO - Using input file: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\surgery_data_engineered_v3.xlsx
+2025-05-15 13:58:18,431 - INFO - 
+=== 1. Loading Engineered Data (from 002_v3) ===
+2025-05-15 13:59:06,874 - INFO - Loaded engineered data: 63,120 rows, 52 columns
+2025-05-15 13:59:06,875 - INFO - 
+=== 2. Feature Selection and Target Definition ===
+2025-05-15 13:59:06,876 - INFO - 
+--- Pre-split Data Type Conversions & Cleaning ---
+2025-05-15 13:59:06,877 - INFO - Ensured boolean/flag feature 'is_weekend' is int (0/1).
+2025-05-15 13:59:06,878 - INFO - Ensured boolean/flag feature 'bmi_missing' is int (0/1).
+2025-05-15 13:59:06,879 - INFO - Ensured boolean/flag feature 'has_missing_labs' is int (0/1).
+2025-05-15 13:59:06,880 - INFO - Ensured boolean/flag feature 'near_holiday' is int (0/1).
+2025-05-15 13:59:06,880 - INFO - Ensured boolean/flag feature 'is_surgery_after_holiday_weekend' is int (0/1).
+2025-05-15 13:59:06,890 - INFO - Coerced 'sodium' to numeric.
+2025-05-15 13:59:06,892 - INFO - Clipped 'bmi' to range [10, 70].
+2025-05-15 13:59:06,925 - INFO - Converted 'age_decade' to string, replaced <NA>/'nan' with '__MISSING__'.
+2025-05-15 13:59:06,934 - INFO - Ensured 'department' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,940 - INFO - Ensured 'surgery_site' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,947 - INFO - Ensured 'anesthesia' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,953 - INFO - Ensured 'gender' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,960 - INFO - Ensured 'payer' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,970 - INFO - Ensured 'marital_status' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,978 - INFO - Ensured 'surgery_weekday' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,985 - INFO - Ensured 'season' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:06,992 - INFO - Ensured 'wait_days_category' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:07,001 - INFO - Ensured 'bmi_category' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:07,012 - INFO - Ensured 'distance_bucket' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:07,018 - INFO - Ensured 'site_room' is string and NaNs (or 'nan' strings) are '__MISSING__'.
+2025-05-15 13:59:07,125 - INFO - Shape of X after selection & pre-split cleaning: (63120, 39), Shape of y: (63120,)
+2025-05-15 13:59:07,125 - INFO - Final Numeric Features for pipeline (26): ['age', 'bmi', 'albumin', 'pt_inr', 'potassium', 'sodium', 'hb', 'wbc', 'plt', 'distance_km', 'wait_days', 'days_to_next_holiday', 'days_from_prev_holiday', 'num_existing_labs', 'num_medications', 'num_diagnoses', 'site_room_cancel_rate_smoothed', 'anesthesia_cancel_rate_smoothed', 'procedure_code_cancel_rate_smoothed', 'weekday_cancel_rate_smoothed', 'distance_bucket_cancel_rate_smoothed', 'is_weekend', 'bmi_missing', 'has_missing_labs', 'near_holiday', 'is_surgery_after_holiday_weekend']
+2025-05-15 13:59:07,126 - INFO - Final Categorical Features for pipeline (13): ['department', 'surgery_site', 'anesthesia', 'gender', 'payer', 'marital_status', 'surgery_weekday', 'season', 'age_decade', 'wait_days_category', 'bmi_category', 'distance_bucket', 'site_room']
+2025-05-15 13:59:07,126 - INFO - 
+=== Saving Intermediate X (before split and pipeline) to Excel: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_pre_pipeline.xlsx ===
+2025-05-15 13:59:56,583 - INFO - Successfully saved X to C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_pre_pipeline.xlsx
+2025-05-15 13:59:56,583 - INFO - 
+=== 3. Train-Test Split ===
+2025-05-15 13:59:56,628 - INFO - X_train shape: (47340, 39), y_train shape: (47340,)
+2025-05-15 13:59:56,629 - INFO - X_test shape: (15780, 39), y_test shape: (15780,)
+2025-05-15 13:59:56,629 - INFO - 
+=== 4. Preprocessing Pipelines Definition ===
+2025-05-15 13:59:56,629 - INFO - Numeric features for ColumnTransformer (26): ['age', 'bmi', 'albumin', 'pt_inr', 'potassium', 'sodium', 'hb', 'wbc', 'plt', 'distance_km', 'wait_days', 'days_to_next_holiday', 'days_from_prev_holiday', 'num_existing_labs', 'num_medications', 'num_diagnoses', 'site_room_cancel_rate_smoothed', 'anesthesia_cancel_rate_smoothed', 'procedure_code_cancel_rate_smoothed', 'weekday_cancel_rate_smoothed', 'distance_bucket_cancel_rate_smoothed', 'is_weekend', 'bmi_missing', 'has_missing_labs', 'near_holiday', 'is_surgery_after_holiday_weekend']
+2025-05-15 13:59:56,629 - INFO - Categorical features for ColumnTransformer (13): ['department', 'surgery_site', 'anesthesia', 'gender', 'payer', 'marital_status', 'surgery_weekday', 'season', 'age_decade', 'wait_days_category', 'bmi_category', 'distance_bucket', 'site_room']
+2025-05-15 13:59:56,630 - INFO - 
+=== 5. Applying Preprocessor and Saving Data ===
+2025-05-15 13:59:57,490 - INFO - X_train_processed shape: (47340, 156)
+2025-05-15 13:59:57,574 - INFO - X_test_processed shape: (15780, 156)
+2025-05-15 13:59:57,574 - INFO - Number of features after OHE & processing: 156
+2025-05-15 13:59:57,589 - INFO - Saved X_train_processed to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_train_processed.joblib
+2025-05-15 13:59:57,593 - INFO - Saved y_train to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_y_train.joblib
+2025-05-15 13:59:57,599 - INFO - Saved X_test_processed to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_test_processed.joblib
+2025-05-15 13:59:57,603 - INFO - Saved y_test to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_y_test.joblib
+2025-05-15 13:59:57,607 - INFO - Saved preprocessor to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_preprocessor_pipeline.joblib
+2025-05-15 13:59:57,608 - INFO - Saved feature names to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_processed_feature_names.joblib
+2025-05-15 13:59:57,609 - INFO - 
+--- Data Final Preprocessing (Script 004_Data_Final_Preprocessing) complete ---
+2025-05-15 13:59:57,609 - INFO - Processed files saved in: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data
+2025-05-15 13:59:57,610 - INFO - 
+--- Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\004_Data_Final_Preprocessing_1.txt ---

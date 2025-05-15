@@ -1,0 +1,76 @@
+2025-05-15 14:32:55,299 - INFO - --- XGBoost with RandomOverSampler (Script Appendix_C_RandomOverSampling_Experiment) ---
+2025-05-15 14:32:55,299 - INFO - Using processed data from outputs of script 004 (e.g., C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_train_processed.joblib).
+2025-05-15 14:32:55,300 - INFO - Using best XGBoost params from: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\006_best_xgb_params.joblib
+2025-05-15 14:32:55,300 - INFO - === 1. Loading Processed Data and Best Hyperparameters ===
+2025-05-15 14:32:55,317 - INFO - Loaded best XGBoost hyperparameters from main tuning script (006).
+2025-05-15 14:32:55,317 - INFO - Best Hyperparameters: {'subsample': 0.9, 'reg_lambda': 0.5, 'reg_alpha': 0.001, 'n_estimators': 300, 'min_child_weight': 7, 'max_depth': 10, 'learning_rate': 0.02, 'gamma': 0.4, 'colsample_bytree': 0.6}
+2025-05-15 14:32:55,317 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-15 14:32:55,318 - INFO - Loaded y_train. Positive class proportion: 0.20
+2025-05-15 14:32:55,318 - INFO - === 2. Defining RandomOverSampler-XGBoost Pipeline ===
+2025-05-15 14:32:55,318 - INFO - XGBoost model configured with best parameters and scale_pos_weight=1 for RandomOverSampler.
+2025-05-15 14:32:55,318 - INFO - RandomOverSampler-XGBoost pipeline defined.
+2025-05-15 14:32:55,319 - INFO - === 3. Training the RandomOverSampler-XGBoost Pipeline ===
+2025-05-15 14:32:58,815 - INFO - Pipeline training completed in 0.06 minutes.
+2025-05-15 14:32:58,815 - INFO - === 4. Evaluating the RandomOverSampler-XGBoost Model ===
+2025-05-15 14:32:58,815 - INFO - Making predictions on the test set...
+2025-05-15 14:32:58,930 - INFO - 
+--- RandomOverSampler-XGBoost Model (Appendix_C_RandomOverSampling_Experiment) Evaluation Metrics ---
+2025-05-15 14:32:58,948 - INFO - Accuracy:  0.7124
+Precision: 0.3747
+Recall:    0.6734
+F1-score:  0.4815
+ROC AUC:   0.7728
+PR AUC:    0.4720
+2025-05-15 14:32:58,957 - INFO - 
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.72      0.80     12651
+    Canceled (1)       0.37      0.67      0.48      3129
+
+        accuracy                           0.71     15780
+       macro avg       0.64      0.70      0.64     15780
+    weighted avg       0.80      0.71      0.74     15780
+
+2025-05-15 14:32:58,959 - INFO - Confusion Matrix:
+[[9135 3516]
+ [1022 2107]]
+2025-05-15 14:32:59,107 - INFO - CM plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\Appendix_C_RandomOverSampling_Experiment_CM.png
+2025-05-15 14:32:59,107 - INFO - 
+=== 4b. Appendix_C_RandomOverSampling_Experiment Feature Importance ===
+2025-05-15 14:32:59,113 - INFO - 
+Top 20 Features by Importance:
+2025-05-15 14:32:59,115 - INFO -                                                                                                           feature  importance
+                                                                                      wait_days_category_0-7 days    0.111965
+surgery_site_חדר ניתוח סטולברג                                                                                       0.032876
+  department_כירורגיה פלסטית                                                                                         0.026489
+  department_יולדות                                                                                                  0.025527
+                                                                                     wait_days_category_365+ days    0.024447
+                                                                                     wait_days_category_8-30 days    0.018858
+                                                                              procedure_code_cancel_rate_smoothed    0.018744
+                                                                                                        wait_days    0.017508
+                                                                                   wait_days_category_91-365 days    0.016772
+  department_נשים                                                                                                    0.016082
+  department_צנתורי לב                                                                                               0.015597
+surgery_site_חדר ניתוח מרכזי                                                                                         0.014560
+  department_ריאות                                                                                                   0.014221
+surgery_site_ברונכוסקופיה                                                                                            0.013337
+  department_כלי דם                                                                                                  0.012594
+                                                                                site_room_חדר ניתוח אשפוז יום __5    0.012111
+surgery_site_חדר ניתוח עיניים                                                                                        0.011692
+                                                                                    site_room_חדר ניתוח מרכזי __1    0.011621
+  department_אורתופדיה                                                                                               0.010121
+                                                                                    wait_days_category_31-90 days    0.009669
+2025-05-15 14:32:59,451 - INFO - FI plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\Appendix_C_RandomOverSampling_Experiment_FI.png
+2025-05-15 14:32:59,451 - INFO - === 5. Saving Appendix_C_RandomOverSampling_Experiment Model and Results ===
+2025-05-15 14:32:59,473 - INFO - Appendix_C_RandomOverSampling_Experiment pipeline model saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\appendix_C_xgb_ros_model.joblib
+2025-05-15 14:32:59,475 - INFO - Appendix_C_RandomOverSampling_Experiment evaluation metrics saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\Appendix_C_RandomOverSampling_Experiment_evaluation_metrics.txt
+2025-05-15 14:32:59,475 - INFO - 
+=== 6. Comparison with Previous Models ===
+2025-05-15 14:32:59,475 - INFO - Metrics for Appendix_C_RandomOverSampling_Experiment:
+2025-05-15 14:32:59,475 - INFO -   Precision: 0.3747, Recall: 0.6734, F1-score: 0.4815, PR AUC: 0.4720
+2025-05-15 14:32:59,475 - INFO - Compare with:
+2025-05-15 14:32:59,475 - INFO -   1. Tuned XGBoost (006_Model_XGBoost_Tuning with optimal threshold from 007).
+2025-05-15 14:32:59,476 - INFO -   2. Tuned LightGBM (008_Model_LightGBM_Optuna_Tuning with optimal threshold from 009).
+2025-05-15 14:32:59,476 - INFO - 
+--- Appendix_C_RandomOverSampling_Experiment training and evaluation complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\Appendix_C_RandomOverSampling_Experiment.txt ---

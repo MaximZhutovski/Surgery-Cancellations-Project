@@ -1,0 +1,20 @@
+--- Tuned LightGBM with Optimal Threshold (0.5468) ---
+Precision: 0.3940
+Recall:    0.6178
+F1-score:  0.4811
+
+Underlying PR AUC of the model: 0.4705
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.89      0.76      0.82     12651
+    Canceled (1)       0.39      0.62      0.48      3129
+
+        accuracy                           0.74     15780
+       macro avg       0.64      0.69      0.65     15780
+    weighted avg       0.79      0.74      0.76     15780
+
+
+CM:
+[[9678, 2973],
+ [1196, 1933]]

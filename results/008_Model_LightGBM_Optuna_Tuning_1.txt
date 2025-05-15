@@ -1,0 +1,93 @@
+2025-05-15 14:20:19,602 - INFO - --- LightGBM with Optuna Hyperparameter Tuning (Script 008_Model_LightGBM_Optuna_Tuning) ---
+2025-05-15 14:20:19,602 - INFO - Using processed data from outputs of script 004 (e.g., C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_train_processed.joblib).
+2025-05-15 14:20:19,602 - INFO - === 1. Loading Processed Data ===
+2025-05-15 14:20:19,619 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-15 14:20:19,619 - INFO - Loaded 156 feature names.
+2025-05-15 14:20:19,619 - INFO - === 2. Defining Optuna Objective Function for LightGBM ===
+2025-05-15 14:20:19,621 - INFO - Calculated scale_pos_weight for LightGBM: 4.04
+2025-05-15 14:20:19,621 - INFO - === 3. Running Optuna Study for LightGBM ===
+2025-05-15 14:20:19,622 - INFO - Starting Optuna study with 50 trials and 3 CV splits...
+2025-05-15 14:21:27,514 - INFO - Optuna study completed in 1.13 minutes.
+2025-05-15 14:21:27,514 - INFO - Best Score (average_precision) from Optuna study: 0.4519
+2025-05-15 14:21:27,514 - INFO - Best Hyperparameters found by Optuna:
+2025-05-15 14:21:27,516 - INFO -   n_estimators: 850
+2025-05-15 14:21:27,516 - INFO -   learning_rate: 0.04030011759052641
+2025-05-15 14:21:27,516 - INFO -   num_leaves: 57
+2025-05-15 14:21:27,516 - INFO -   max_depth: 11
+2025-05-15 14:21:27,516 - INFO -   min_child_samples: 100
+2025-05-15 14:21:27,516 - INFO -   subsample: 0.65
+2025-05-15 14:21:27,516 - INFO -   colsample_bytree: 0.75
+2025-05-15 14:21:27,516 - INFO -   reg_alpha: 0.0015859761672988419
+2025-05-15 14:21:27,516 - INFO -   reg_lambda: 0.012904080278929704
+2025-05-15 14:21:27,516 - INFO -   objective: binary
+2025-05-15 14:21:27,516 - INFO -   metric: average_precision
+2025-05-15 14:21:27,518 - INFO -   verbosity: -1
+2025-05-15 14:21:27,518 - INFO -   boosting_type: gbdt
+2025-05-15 14:21:27,518 - INFO -   scale_pos_weight: 4.043144774688399
+2025-05-15 14:21:27,518 - INFO -   random_state: 42
+2025-05-15 14:21:27,518 - INFO -   n_jobs: -1
+2025-05-15 14:21:27,518 - INFO - === 4. Training Final LightGBM Model with Best Optuna Parameters ===
+2025-05-15 14:21:27,518 - INFO - Training final LightGBM model...
+2025-05-15 14:21:29,790 - INFO - Final LightGBM model training completed in 2.27 seconds.
+2025-05-15 14:21:29,790 - INFO - === 5. Evaluating Final LightGBM Model ===
+2025-05-15 14:21:29,790 - INFO - Making predictions on the test set...
+2025-05-15 14:21:30,050 - INFO - 
+--- LightGBM (008_Model_LightGBM_Optuna_Tuning) Evaluation Metrics ---
+2025-05-15 14:21:30,069 - INFO - Accuracy:  0.7308
+Precision: 0.3858
+Recall:    0.6040
+F1-score:  0.4709
+ROC AUC:   0.7650
+PR AUC:    0.4607
+2025-05-15 14:21:30,079 - INFO - 
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.89      0.76      0.82     12651
+    Canceled (1)       0.39      0.60      0.47      3129
+
+        accuracy                           0.73     15780
+       macro avg       0.64      0.68      0.65     15780
+    weighted avg       0.79      0.73      0.75     15780
+
+2025-05-15 14:21:30,081 - INFO - Confusion Matrix:
+[[9642 3009]
+ [1239 1890]]
+2025-05-15 14:21:30,232 - INFO - CM plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\008_Model_LightGBM_Optuna_Tuning_CM.png
+2025-05-15 14:21:30,232 - INFO - 
+=== 5b. LightGBM (008_Model_LightGBM_Optuna_Tuning) Feature Importance ===
+2025-05-15 14:21:30,232 - INFO - 
+Top 20 Features by Importance:
+2025-05-15 14:21:30,232 - INFO -                              feature  importance
+                           wait_days        3584
+                days_to_next_holiday        3378
+              days_from_prev_holiday        3349
+                                 age        2670
+ procedure_code_cancel_rate_smoothed        2556
+                                 wbc        2488
+                                 plt        2421
+                                 bmi        2222
+                         distance_km        2109
+                                  hb        1992
+                              sodium        1815
+                             albumin        1366
+                     num_medications        1344
+                              pt_inr        1210
+      site_room_cancel_rate_smoothed        1167
+                           potassium        1125
+                       num_diagnoses         875
+        weekday_cancel_rate_smoothed         764
+                   num_existing_labs         536
+distance_bucket_cancel_rate_smoothed         454
+2025-05-15 14:21:30,539 - INFO - FI plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\008_Model_LightGBM_Optuna_Tuning_FI.png
+2025-05-15 14:21:30,541 - INFO - === 6. Saving LightGBM (008_Model_LightGBM_Optuna_Tuning) Model and Results ===
+2025-05-15 14:21:30,597 - INFO - LightGBM model saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\008_lgbm_optuna_tuned_model.joblib
+2025-05-15 14:21:30,597 - INFO - Best LightGBM hyperparameters saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\008_best_lgbm_params_optuna.joblib
+2025-05-15 14:21:30,600 - INFO - LightGBM evaluation metrics saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\008_Model_LightGBM_Optuna_Tuning_evaluation_metrics.txt
+2025-05-15 14:21:30,601 - INFO - 
+=== 7. Comparison with Previous Best Model (Tuned XGBoost) ===
+2025-05-15 14:21:30,601 - INFO - Metrics for LightGBM (008_Model_LightGBM_Optuna_Tuning):
+2025-05-15 14:21:30,601 - INFO -   Precision: 0.3858, Recall: 0.6040, F1-score: 0.4709, PR AUC: 0.4607
+2025-05-15 14:21:30,601 - INFO - Compare with Tuned XGBoost with Optimal Threshold (from 007_Model_XGBoost_Threshold_Tuning).
+2025-05-15 14:21:30,601 - INFO - 
+--- 008_Model_LightGBM_Optuna_Tuning complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\008_Model_LightGBM_Optuna_Tuning_1.txt ---

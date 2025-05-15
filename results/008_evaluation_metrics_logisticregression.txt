@@ -1,0 +1,22 @@
+--- LogisticRegression Evaluation Metrics ---
+Accuracy:  0.6603
+Precision: 0.3368
+Recall:    0.7363
+F1-score:  0.4622
+ROC AUC:   0.7492
+PR AUC:    0.4260
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.64      0.75     12651
+    Canceled (1)       0.34      0.74      0.46      3129
+
+        accuracy                           0.66     15780
+       macro avg       0.62      0.69      0.61     15780
+    weighted avg       0.79      0.66      0.69     15780
+
+
+Confusion Matrix:
+[[8115, 4536],
+ [ 825, 2304]]

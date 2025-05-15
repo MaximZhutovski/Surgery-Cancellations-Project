@@ -1,0 +1,22 @@
+--- RandomForest Evaluation Metrics ---
+Accuracy:  0.6579
+Precision: 0.3379
+Recall:    0.7565
+F1-score:  0.4672
+ROC AUC:   0.7590
+PR AUC:    0.4281
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.63      0.75     12651
+    Canceled (1)       0.34      0.76      0.47      3129
+
+        accuracy                           0.66     15780
+       macro avg       0.63      0.69      0.61     15780
+    weighted avg       0.80      0.66      0.69     15780
+
+
+Confusion Matrix:
+[[8014, 4637],
+ [ 762, 2367]]

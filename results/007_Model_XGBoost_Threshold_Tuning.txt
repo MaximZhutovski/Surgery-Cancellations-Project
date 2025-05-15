@@ -1,0 +1,54 @@
+2025-05-15 14:16:58,649 - INFO - --- XGBoost Threshold Tuning (Script 007_Model_XGBoost_Threshold_Tuning) ---
+2025-05-15 14:16:58,650 - INFO - Using tuned model from: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\006_xgb_tuned_model.joblib
+2025-05-15 14:16:58,650 - INFO - Using test data from: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\004_X_test_processed.joblib
+2025-05-15 14:16:58,650 - INFO - === 1. Loading Processed Test Data and Tuned XGBoost Model ===
+2025-05-15 14:16:59,951 - INFO - Loaded X_test_processed: (15780, 156)
+2025-05-15 14:16:59,951 - INFO - Tuned XGBoost model loaded successfully from: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\006_xgb_tuned_model.joblib
+2025-05-15 14:16:59,951 - INFO - === 2. Predicting Probabilities on Test Set (Tuned XGBoost) ===
+2025-05-15 14:17:00,012 - INFO - Probabilities predicted successfully.
+2025-05-15 14:17:00,012 - INFO - === 3. Evaluating Metrics for Different Thresholds (Tuned XGBoost) ===
+2025-05-15 14:17:00,257 - INFO - 
+Metrics for various thresholds (sample - tuned XGBoost):
+2025-05-15 14:17:00,261 - INFO -  threshold  precision   recall  f1_score
+      0.05   0.204886 0.997124  0.339925
+      0.15   0.238382 0.973794  0.383005
+      0.25   0.270255 0.927453  0.418548
+      0.35   0.308571 0.854906  0.453467
+      0.45   0.353143 0.757750  0.481764
+      0.55   0.402862 0.575903  0.474086
+      0.65   0.501087 0.368169  0.424466
+      0.75   0.632469 0.179291  0.279382
+      0.85   0.830097 0.054650  0.102549
+      0.95   0.833333 0.003196  0.006367
+2025-05-15 14:17:00,265 - INFO - 
+Full threshold tuning results (XGBoost) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\007_Model_XGBoost_Threshold_Tuning_threshold_tuning_results.csv
+2025-05-15 14:17:00,266 - INFO - === 4. Plotting Metrics vs. Threshold (Tuned XGBoost) ===
+2025-05-15 14:17:00,303 - INFO - 
+Threshold for Max F1-score (from iteration): 0.480 (F1: 0.4830)
+2025-05-15 14:17:00,461 - INFO - Threshold metrics plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\007_Model_XGBoost_Threshold_Tuning_metrics_vs_threshold_plot.png
+2025-05-15 14:17:00,476 - INFO - Optimal threshold from PR curve (max F1): 0.4845 (P: 0.3681, R: 0.7069, F1: 0.4841)
+2025-05-15 14:17:00,603 - INFO - Detailed PR curve plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\007_Model_XGBoost_Threshold_Tuning_pr_curve_detailed.png
+2025-05-15 14:17:00,604 - INFO - === 5. Evaluating XGBoost Model with Optimal Threshold (Maximizing F1-score) ===
+2025-05-15 14:17:00,605 - INFO - Using optimal threshold for XGBoost: 0.4845
+2025-05-15 14:17:00,605 - INFO - 
+--- Evaluation Metrics for XGBoost at Optimal Threshold (0.4845) ---
+2025-05-15 14:17:00,608 - INFO - Precision (at optimal threshold): 0.3681
+2025-05-15 14:17:00,608 - INFO - Recall (at optimal threshold):    0.7069
+2025-05-15 14:17:00,609 - INFO - F1-score (at optimal threshold):  0.4841
+2025-05-15 14:17:00,618 - INFO - 
+Classification Report (XGBoost at optimal threshold):
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.70      0.79     12651
+    Canceled (1)       0.37      0.71      0.48      3129
+
+        accuracy                           0.70     15780
+       macro avg       0.64      0.70      0.64     15780
+    weighted avg       0.80      0.70      0.73     15780
+
+2025-05-15 14:17:00,620 - INFO - Confusion Matrix (XGBoost at optimal threshold):
+[[8853 3798]
+ [ 917 2212]]
+2025-05-15 14:17:00,621 - INFO - Optimal threshold evaluation metrics (XGBoost) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\007_Model_XGBoost_Threshold_Tuning_evaluation_metrics_optimal_thresh.txt
+2025-05-15 14:17:00,622 - INFO - 
+--- Threshold Tuning for Tuned XGBoost (007_Model_XGBoost_Threshold_Tuning) complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\007_Model_XGBoost_Threshold_Tuning.txt ---

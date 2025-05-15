@@ -1,0 +1,76 @@
+2025-05-15 14:28:42,505 - INFO - --- XGBoost with SMOTE (Script 007) ---
+2025-05-15 14:28:42,506 - INFO - === 1. Loading Processed Data and Best Hyperparameters ===
+2025-05-15 14:28:42,529 - INFO - Loaded best XGBoost hyperparameters from script 006.
+2025-05-15 14:28:42,530 - INFO - Best Hyperparameters: {'subsample': 0.9, 'reg_lambda': 0.5, 'reg_alpha': 0.001, 'n_estimators': 300, 'min_child_weight': 7, 'max_depth': 10, 'learning_rate': 0.02, 'gamma': 0.4, 'colsample_bytree': 0.6}
+2025-05-15 14:28:42,530 - INFO - Loaded X_train_processed: (47340, 156)
+2025-05-15 14:28:42,530 - INFO - Loaded y_train: (47340,)
+2025-05-15 14:28:42,531 - INFO - === 2. Defining SMOTE-XGBoost Pipeline ===
+2025-05-15 14:28:42,531 - INFO - XGBoost model configured with best parameters (scale_pos_weight omitted for SMOTE).
+2025-05-15 14:28:42,531 - INFO - SMOTE-XGBoost pipeline defined.
+2025-05-15 14:28:42,531 - INFO - === 3. Training the SMOTE-XGBoost Pipeline ===
+2025-05-15 14:28:42,531 - INFO - This might take a moment as SMOTE is applied before training...
+2025-05-15 14:28:53,170 - INFO - SMOTE-XGBoost pipeline training completed in 0.18 minutes.
+2025-05-15 14:28:53,172 - INFO - === 4. Evaluating the SMOTE-XGBoost Model ===
+2025-05-15 14:28:53,172 - INFO - Making predictions on the test set with the SMOTE-XGBoost model...
+2025-05-15 14:28:53,304 - INFO - 
+--- SMOTE-XGBoost Model Evaluation Metrics ---
+2025-05-15 14:28:53,325 - INFO - Accuracy:  0.8126
+2025-05-15 14:28:53,325 - INFO - Precision: 0.6911
+2025-05-15 14:28:53,326 - INFO - Recall:    0.0994
+2025-05-15 14:28:53,326 - INFO - F1-score:  0.1738
+2025-05-15 14:28:53,326 - INFO - ROC AUC:   0.7643
+2025-05-15 14:28:53,326 - INFO - PR AUC:    0.4545
+2025-05-15 14:28:53,326 - INFO - 
+SMOTE-XGBoost Model Classification Report:
+2025-05-15 14:28:53,340 - INFO - 
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.82      0.99      0.89     12651
+    Canceled (1)       0.69      0.10      0.17      3129
+
+        accuracy                           0.81     15780
+       macro avg       0.75      0.54      0.53     15780
+    weighted avg       0.79      0.81      0.75     15780
+
+2025-05-15 14:28:53,341 - INFO - 
+--- SMOTE-XGBoost Model Confusion Matrix ---
+2025-05-15 14:28:53,342 - INFO - SMOTE-XGBoost Confusion Matrix:
+[[12512   139]
+ [ 2818   311]]
+2025-05-15 14:28:53,631 - INFO - SMOTE-XGBoost confusion matrix plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\007_confusion_matrix_xgb_smote.png
+2025-05-15 14:28:53,650 - INFO - 
+=== 4b. SMOTE-XGBoost Model Feature Importance ===
+2025-05-15 14:28:53,654 - INFO - 
+Top 20 Features by Importance (SMOTE-XGBoost Model):
+2025-05-15 14:28:53,658 - INFO -                        feature  importance
+           marital_status_נשוי    0.096136
+ wait_days_category_31-90 days    0.073436
+      distance_bucket_10-20 km    0.068041
+                 season_Summer    0.054301
+                   gender_נקבה    0.052796
+                    gender_זכר    0.047302
+wait_days_category_91-365 days    0.038183
+               age_decade_70.0    0.035645
+   wait_days_category_0-7 days    0.034315
+                 season_Winter    0.031945
+       distance_bucket_5-10 km    0.029397
+               age_decade_60.0    0.028196
+       bmi_category_Overweight    0.022945
+                     wait_days    0.022355
+                 season_Spring    0.022084
+                   payer_כללית    0.020206
+        surgery_weekday_Monday    0.017595
+  wait_days_category_8-30 days    0.017088
+           bmi_category_Normal    0.015247
+               age_decade_50.0    0.015206
+2025-05-15 14:28:54,101 - INFO - SMOTE-XGBoost feature importance plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\007_feature_importance_xgb_smote.png
+2025-05-15 14:28:54,113 - INFO - === 5. Saving SMOTE-XGBoost Model and Results ===
+2025-05-15 14:28:54,126 - INFO - SMOTE-XGBoost pipeline model saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\xgboost_model_smote.joblib
+2025-05-15 14:28:54,128 - INFO - SMOTE-XGBoost evaluation metrics saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\007_evaluation_metrics_xgb_smote.txt
+2025-05-15 14:28:54,128 - INFO - === 6. Comparison with Tuned Model (from 006) ===
+2025-05-15 14:28:54,128 - INFO - Metrics for SMOTE-XGBoost Model:
+2025-05-15 14:28:54,129 - INFO -   Precision: 0.6911, Recall: 0.0994, F1-score: 0.1738, PR AUC: 0.4545
+2025-05-15 14:28:54,129 - INFO - Compare these to the metrics from the tuned model in 006 (check 006_evaluation_metrics_xgb_tuned.txt).
+2025-05-15 14:28:54,129 - INFO - Key considerations: Did Precision improve? How did Recall change? What about PR AUC?
+2025-05-15 14:28:54,130 - INFO - 
+--- XGBoost with SMOTE training and evaluation complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\Appendix_B_SMOTE_Experiment.txt ---

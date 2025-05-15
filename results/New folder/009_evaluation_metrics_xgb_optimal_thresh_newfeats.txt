@@ -1,0 +1,19 @@
+--- Tuned XGBoost (New Features) with Optimal Threshold (0.4854) ---
+Precision: 0.3632
+Recall:    0.7117
+F1-score:  0.4810
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.69      0.78     12651
+    Canceled (1)       0.36      0.71      0.48      3129
+
+        accuracy                           0.70     15780
+       macro avg       0.63      0.70      0.63     15780
+    weighted avg       0.80      0.70      0.72     15780
+
+
+CM:
+[[8747, 3904],
+ [ 902, 2227]]

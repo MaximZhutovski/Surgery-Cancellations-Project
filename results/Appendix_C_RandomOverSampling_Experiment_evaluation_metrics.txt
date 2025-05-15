@@ -1,0 +1,35 @@
+--- Appendix_C_RandomOverSampling_Experiment Evaluation Metrics ---
+Used Best Hyperparameters from main XGBoost tuning (with scale_pos_weight=1):
+  subsample: 0.9
+  reg_lambda: 0.5
+  reg_alpha: 0.001
+  n_estimators: 300
+  min_child_weight: 7
+  max_depth: 10
+  learning_rate: 0.02
+  gamma: 0.4
+  colsample_bytree: 0.6
+  scale_pos_weight: 1
+
+--- Evaluation on Test Set ---
+Accuracy:  0.7124
+Precision: 0.3747
+Recall:    0.6734
+F1-score:  0.4815
+ROC AUC:   0.7728
+PR AUC:    0.4720
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.72      0.80     12651
+    Canceled (1)       0.37      0.67      0.48      3129
+
+        accuracy                           0.71     15780
+       macro avg       0.64      0.70      0.64     15780
+    weighted avg       0.80      0.71      0.74     15780
+
+
+CM:
+[[9135, 3516],
+ [1022, 2107]]

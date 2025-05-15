@@ -1,0 +1,52 @@
+2025-05-12 17:53:00,043 - INFO - --- Threshold Tuning for Tuned XGBoost (New Features - Script 009) ---
+2025-05-12 17:53:00,043 - INFO - === 1. Loading Processed Test Data and Tuned XGBoost Model (New Features) ===
+2025-05-12 17:53:01,345 - INFO - Loaded X_test_processed: (15780, 156)
+2025-05-12 17:53:01,345 - INFO - Tuned XGBoost model (new features) loaded successfully from: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\data\models\xgboost_model_tuned_newfeats.joblib
+2025-05-12 17:53:01,345 - INFO - === 2. Predicting Probabilities on Test Set (Tuned XGBoost, New Features) ===
+2025-05-12 17:53:01,412 - INFO - Probabilities predicted successfully.
+2025-05-12 17:53:01,412 - INFO - === 3. Evaluating Metrics for Different Thresholds (Tuned XGBoost, New Features) ===
+2025-05-12 17:53:01,648 - INFO - 
+Metrics for various thresholds (sample - new features model):
+2025-05-12 17:53:01,652 - INFO -  threshold  precision   recall  f1_score
+      0.05   0.206522 0.997763  0.342212
+      0.15   0.238058 0.971556  0.382414
+      0.25   0.267416 0.927453  0.415135
+      0.35   0.308229 0.860658  0.453902
+      0.45   0.347328 0.756152  0.476008
+      0.55   0.398878 0.590604  0.476166
+      0.65   0.486453 0.372963  0.422214
+      0.75   0.609278 0.188878  0.288363
+      0.85   0.792157 0.064557  0.119385
+      0.95   0.880000 0.007031  0.013951
+2025-05-12 17:53:01,659 - INFO - 
+Full threshold tuning results (new features) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\009_threshold_tuning_results_newfeats.csv
+2025-05-12 17:53:01,659 - INFO - === 4. Plotting Metrics vs. Threshold (Tuned XGBoost, New Features) ===
+2025-05-12 17:53:01,694 - INFO - 
+Threshold for Max F1-score (from iteration): 0.490 (F1: 0.4803)
+2025-05-12 17:53:01,851 - INFO - Threshold metrics plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\009_threshold_metrics_plot_newfeats.png
+2025-05-12 17:53:01,866 - INFO - Optimal threshold from PR curve (max F1): 0.4854 (P: 0.3632, R: 0.7117, F1: 0.4810)
+2025-05-12 17:53:01,996 - INFO - Detailed PR curve plot saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\plots\009_precision_recall_curve_detailed_newfeats.png
+2025-05-12 17:53:01,996 - INFO - === 5. Evaluating Model with Optimal Threshold (Maximizing F1-score, New Features) ===
+2025-05-12 17:53:01,997 - INFO - Using optimal threshold: 0.4854
+2025-05-12 17:53:01,997 - INFO - 
+--- Evaluation Metrics at Optimal Threshold (0.4854) (New Features) ---
+2025-05-12 17:53:02,000 - INFO - Precision (at optimal threshold): 0.3632
+2025-05-12 17:53:02,001 - INFO - Recall (at optimal threshold):    0.7117
+2025-05-12 17:53:02,001 - INFO - F1-score (at optimal threshold):  0.4810
+2025-05-12 17:53:02,010 - INFO - 
+Classification Report (at optimal threshold):
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.91      0.69      0.78     12651
+    Canceled (1)       0.36      0.71      0.48      3129
+
+        accuracy                           0.70     15780
+       macro avg       0.63      0.70      0.63     15780
+    weighted avg       0.80      0.70      0.72     15780
+
+2025-05-12 17:53:02,012 - INFO - Confusion Matrix (at optimal threshold):
+[[8747 3904]
+ [ 902 2227]]
+2025-05-12 17:53:02,014 - INFO - Optimal threshold evaluation metrics (new features) saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\009_evaluation_metrics_xgb_optimal_thresh_newfeats.txt
+2025-05-12 17:53:02,014 - INFO - 
+--- Threshold Tuning for Tuned XGBoost (New Features) complete. Full output saved to: C:\Users\coolm\Desktop\לימודים\שנה ג\Surgery_Cancellation\results\009_Threshold_Tuning_XGB.txt ---

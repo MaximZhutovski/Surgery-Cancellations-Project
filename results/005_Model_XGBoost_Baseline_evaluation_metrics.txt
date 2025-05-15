@@ -1,0 +1,22 @@
+--- XGBoost Baseline Model (005_Model_XGBoost_Baseline) ---
+Accuracy:  0.6906
+Precision: 0.3582
+Recall:    0.7079
+F1-score:  0.4757
+ROC AUC:   0.7693
+PR AUC:    0.4599
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.69      0.78     12651
+    Canceled (1)       0.36      0.71      0.48      3129
+
+        accuracy                           0.69     15780
+       macro avg       0.63      0.70      0.63     15780
+    weighted avg       0.80      0.69      0.72     15780
+
+
+CM:
+[[8682, 3969],
+ [ 914, 2215]]

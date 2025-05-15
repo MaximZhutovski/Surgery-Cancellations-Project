@@ -1,0 +1,42 @@
+--- LightGBM (Optuna Tuned) Evaluation Metrics ---
+Best CV Score from Optuna (average_precision): 0.4520
+Best Hyperparameters:
+  n_estimators: 600
+  learning_rate: 0.02228479341495335
+  num_leaves: 51
+  max_depth: 11
+  min_child_samples: 39
+  subsample: 0.9
+  colsample_bytree: 0.65
+  reg_alpha: 0.02268855353054817
+  reg_lambda: 0.049229924495232245
+  objective: binary
+  metric: average_precision
+  verbosity: -1
+  boosting_type: gbdt
+  scale_pos_weight: 4.043144774688399
+  random_state: 42
+  n_jobs: -1
+
+--- Evaluation on Test Set ---
+Accuracy:  0.7001
+Precision: 0.3655
+Recall:    0.6961
+F1-score:  0.4793
+ROC AUC:   0.7720
+PR AUC:    0.4705
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.70      0.79     12651
+    Canceled (1)       0.37      0.70      0.48      3129
+
+        accuracy                           0.70     15780
+       macro avg       0.63      0.70      0.63     15780
+    weighted avg       0.80      0.70      0.73     15780
+
+
+CM:
+[[8870, 3781],
+ [ 951, 2178]]

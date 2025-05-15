@@ -1,0 +1,35 @@
+--- Tuned XGBoost Model (New Features) Evaluation Metrics ---
+Best CV Score (average_precision): 0.4514
+Best Hyperparameters:
+  subsample: 1.0
+  reg_lambda: 1
+  reg_alpha: 0.005
+  n_estimators: 400
+  min_child_weight: 7
+  max_depth: 9
+  learning_rate: 0.02
+  gamma: 0.1
+  colsample_bytree: 0.7
+
+--- Evaluation on Test Set ---
+Accuracy:  0.7043
+Precision: 0.3680
+Recall:    0.6849
+F1-score:  0.4788
+ROC AUC:   0.7720
+PR AUC:    0.4702
+
+Classification Report:
+                  precision    recall  f1-score   support
+
+Not Canceled (0)       0.90      0.71      0.79     12651
+    Canceled (1)       0.37      0.68      0.48      3129
+
+        accuracy                           0.70     15780
+       macro avg       0.63      0.70      0.64     15780
+    weighted avg       0.80      0.70      0.73     15780
+
+
+CM:
+[[8971, 3680],
+ [ 986, 2143]]
